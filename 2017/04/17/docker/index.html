@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/17/docker/index.html">
 <meta property="og:site_name" content="Raymon">
 <meta property="og:image" content="http://yoursite.com/images/docker.jpg">
-<meta property="og:updated_time" content="2017-05-22T11:16:33.061Z">
+<meta property="og:updated_time" content="2017-05-23T05:09:16.023Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker学习 | Raymon">
 <meta name="twitter:image" content="http://yoursite.com/images/docker.jpg">
@@ -198,7 +198,7 @@ classes that you can use:
 <h4 id="docker-run"><a href="#docker-run" class="headerlink" title="docker run"></a>docker run</h4><p>运行docker镜像</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 9160:9160 --name=cassandra registry.aliyuncs.com/daydayup/cassandra</div></pre></td></tr></table></figure>
 <h4 id="docker-ps"><a href="#docker-ps" class="headerlink" title="docker ps"></a>docker ps</h4><p>查看docker运行镜像<br>查看所有启动过的镜像，包括挂掉的镜像</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker ps -a</div><div class="line">`</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker ps -a</div></pre></td></tr></table></figure>
 <h4 id="docker-stop、docker-restart、docker-rm"><a href="#docker-stop、docker-restart、docker-rm" class="headerlink" title="docker stop、docker restart、docker rm"></a>docker stop、docker restart、docker rm</h4><p>docker镜像的启停与进程的移除<br>移除所有停掉的镜像进程</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker rm `docker ps -a -q`</div></pre></td></tr></table></figure>
 <hr>
