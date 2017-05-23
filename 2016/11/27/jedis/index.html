@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      Jedis连接池整合spring实例 | Raymon 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="lemin">
+    
+    
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Jedis连接池整合spring实例 | Raymon">
+<meta property="og:url" content="http://yoursite.com/2016/11/27/jedis/index.html">
+<meta property="og:site_name" content="Raymon">
+<meta property="og:image" content="http://yoursite.com/images/jedis.png">
+<meta property="og:updated_time" content="2017-05-19T13:04:08.314Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jedis连接池整合spring实例 | Raymon">
+<meta name="twitter:image" content="http://yoursite.com/images/jedis.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+        <a href="/" title="link to homepage for Raymon"><img src="/avatar.png" width="80" alt="Raymon logo" class="panel-cover__logo logo" /></a>
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Raymon</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          zero to hero
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Jedis连接池整合spring实例</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-11-27" class="post-meta__date date">2016-11-27</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/java/">java</a>, <a class="tags-link" href="/tags/redis/">redis</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p><img src="/images/jedis.png" alt=""><br><a id="more"></a></p>
+<p>redis是一个key-value形式的缓存数据库，是构建高性能web应用的一个强有力工具<br>jedis是java的形式连接操作redis数据库，由spring替我们管理jedis连接池</p>
+<p>直接贴上代码, pom依赖:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--redis--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>spring 配置:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xmlns:jee</span>=<span class="string">"http://www.springframework.org/schema/jee"</span></div><div class="line">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span> <span class="attr">xmlns:p</span>=<span class="string">"http://www.springframework.org/schema/p"</span></div><div class="line">       <span class="attr">xmlns:util</span>=<span class="string">"http://www.springframework.org/schema/util"</span> <span class="attr">xmlns:cache</span>=<span class="string">"http://www.springframework.org/schema/cache"</span></div><div class="line">       <span class="attr">xmlns:tx</span>=<span class="string">"http://www.springframework.org/schema/tx"</span></div><div class="line">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></div><div class="line">                        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd</div><div class="line">                        http://www.springframework.org/schema/context</div><div class="line">                        http://www.springframework.org/schema/context/spring-context-4.1.xsd</div><div class="line">                        http://www.springframework.org/schema/util</div><div class="line">                        http://www.springframework.org/schema/util/spring-util-4.1.xsd</div><div class="line">                        http://www.springframework.org/schema/tx</div><div class="line">                        http://www.springframework.org/schema/tx/spring-tx-4.1.xsd"&gt;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 加载配置属性文件 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">ignore-unresolvable</span>=<span class="string">"true"</span> <span class="attr">location</span>=<span class="string">"classpath:cfg.properties"</span>/&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 加载应用属性实例，可通过  @Value("#&#123;APP_PROP['jdbc.driver']&#125;") String jdbcDriver 方式引用 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">util:properties</span> <span class="attr">id</span>=<span class="string">"APP_PROP"</span> <span class="attr">location</span>=<span class="string">"classpath:cfg.properties"</span> <span class="attr">local-override</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 所有类进行扫描，以完成Bean创建和自动依赖注入的功能 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">context:annotation-config</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.mrwind.dao.redis"</span> /&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- redis连接池的配置 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"jedisPoolConfig"</span> <span class="attr">class</span>=<span class="string">"redis.clients.jedis.JedisPoolConfig"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxIdle"</span> <span class="attr">value</span>=<span class="string">"$&#123;redis.pool.maxIdle&#125;"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxTotal"</span> <span class="attr">value</span>=<span class="string">"$&#123;redis.pool.maxActive&#125;"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- redis的连接池pool，不是必选项：timeout/password  --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"jedisPool"</span> <span class="attr">class</span>=<span class="string">"redis.clients.jedis.JedisPool"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">"0"</span> <span class="attr">ref</span>=<span class="string">"jedisPoolConfig"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">"1"</span> <span class="attr">value</span>=<span class="string">"$&#123;redis.host&#125;"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">"2"</span> <span class="attr">value</span>=<span class="string">"$&#123;redis.port&#125;"</span> <span class="attr">type</span>=<span class="string">"int"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">"3"</span> <span class="attr">value</span>=<span class="string">"$&#123;redis.con.timeout&#125;"</span> <span class="attr">type</span>=<span class="string">"int"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">"4"</span> <span class="attr">value</span>=<span class="string">"$&#123;redis.password&#125;"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>jedis连接池，以及dao方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.mrwind.dao.redis.dao;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</div><div class="line"><span class="keyword">import</span> org.springframework.context.support.FileSystemXmlApplicationContext;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Repository;</div><div class="line"></div><div class="line"><span class="keyword">import</span> redis.clients.jedis.Jedis;</div><div class="line"><span class="keyword">import</span> redis.clients.jedis.JedisPool;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by lilemin on 16/11/17.</div><div class="line"> */</div><div class="line"><span class="meta">@Repository</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisDao</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> JedisPool jedisPool = <span class="keyword">null</span>;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">initialPool</span> <span class="params">()</span> </span>&#123;</div><div class="line">        ApplicationContext applicationContext = </div><div class="line">            <span class="keyword">new</span> FileSystemXmlApplicationContext(<span class="string">"classpath:spring/spring-application-redis.xml"</span>);</div><div class="line">        jedisPool = (JedisPool) applicationContext.getBean(<span class="string">"jedisPool"</span>);</div><div class="line">        System.out.println(<span class="string">"&lt;---jedis pool init---&gt;"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 初始化</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">poolInit</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (jedisPool == <span class="keyword">null</span>) &#123;</div><div class="line">            initialPool();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取Jedis实例</div><div class="line">     * <span class="doctag">@return</span> Jedis</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Jedis <span class="title">getJedis</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (jedisPool == <span class="keyword">null</span>) &#123;</div><div class="line">            poolInit();</div><div class="line">        &#125;</div><div class="line">        Jedis jedis = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">if</span> (jedisPool != <span class="keyword">null</span>) &#123;</div><div class="line">                jedis = jedisPool.getResource();</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;<span class="keyword">finally</span>&#123;</div><div class="line">            returnResource(jedis);</div><div class="line">            System.out.println(<span class="string">"&lt;---jedis return resource---&gt;"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> jedis;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 释放jedis资源</div><div class="line">     * <span class="doctag">@param</span> jedis</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">returnResource</span><span class="params">(<span class="keyword">final</span> Jedis jedis)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (jedis != <span class="keyword">null</span>) &#123;</div><div class="line">            jedis.close();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">hget</span> <span class="params">(String key, String hkey)</span> </span>&#123;</div><div class="line">        String val = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            System.out.println(<span class="string">"redis 查询参数: key="</span> + key + <span class="string">"||hkey="</span> + hkey);</div><div class="line">            val = getJedis().hget(key, hkey);</div><div class="line">            System.out.println(<span class="string">"redis 查询结果: "</span> + val);</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception ex) &#123;</div><div class="line">            ex.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> val;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">hmget</span> <span class="params">(String key, String... field)</span> </span>&#123;</div><div class="line">        List&lt;String&gt; valList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            valList = getJedis().hmget(key, field);</div><div class="line">            System.out.println();</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception ex) &#123;</div><div class="line">            ex.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> valList;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span> <span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++)&#123;</div><div class="line">            <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                    List&lt;String&gt; val = hmget(<span class="string">"clientId"</span>, </div><div class="line">                        <span class="string">"11e62d6ca7390a70ff703fd8994a2627"</span>, <span class="string">"wdi71MIbZ2TxynsEsKZdIIYQ"</span>);</div><div class="line">                    System.out.println(val);                                </div><div class="line">                &#125;</div><div class="line">            &#125;).start();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2016. Raymon ❤ Sunny | Hexo</span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1ebdc2e5c3ef0e1ca01b5ed227ddd88f";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+    <script src="/js/jquery.githubRepoWidget.min.js"></script>
+
+
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

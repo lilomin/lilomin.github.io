@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      Docker学习 | Raymon 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="lemin">
+    
+    
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Docker学习 | Raymon">
+<meta property="og:url" content="http://yoursite.com/2017/04/17/docker/index.html">
+<meta property="og:site_name" content="Raymon">
+<meta property="og:image" content="http://yoursite.com/images/docker.jpg">
+<meta property="og:updated_time" content="2017-05-22T11:16:33.061Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker学习 | Raymon">
+<meta name="twitter:image" content="http://yoursite.com/images/docker.jpg">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+        <a href="/" title="link to homepage for Raymon"><img src="/avatar.png" width="80" alt="Raymon logo" class="panel-cover__logo logo" /></a>
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Raymon</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          zero to hero
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Docker学习</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-04-17" class="post-meta__date date">2017-04-17</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/docker/">docker</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p><img src="/images/docker.jpg" alt=""></p>
+<a id="more"></a>
+<hr>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Docker 是一个可移植的容器，为开发者提供一种快速部署环境的解决方案，可以将相同的环境移植到任何linux机器上正常运行，而不需要重新搭建基础服务配置环境，省去了许多重复搭建工作，并且可以做成shell脚本一键部署，或者利用curl调用docker提供remote api实现远程部署，公司的线上环境使用到docker部署环境，因此自己也花了点时间去学习了一下；</p>
+<hr>
+<h3 id="搭建Docker"><a href="#搭建Docker" class="headerlink" title="搭建Docker"></a>搭建Docker</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>首先你需要一台linux主机，听说docker(CE)已经支持windows10了，但是作为主机提供服务windows还是不靠谱，因此这里建议如果你的机器是windows的先去下个VMware再安装个linux；</p>
+<h4 id="配置Docker远程端口"><a href="#配置Docker远程端口" class="headerlink" title="配置Docker远程端口"></a>配置Docker远程端口</h4><p>添加一行开启tcp端口: OPTIONS=’–selinux-enabled -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock’, 然后重启docker即可使用curl等调用docker提供的API, 不用登陆服务器或虚拟机就能通过脚本一键快速启停服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># or /etc/default/docker</div><div class="line">vim /etc/sysconfig/docker</div><div class="line">#..................vim...................</div><div class="line"># /etc/sysconfig/docker</div><div class="line"># Modify these options if you want to change the way the docker daemon runs</div><div class="line"># OPTIONS=&apos;--selinux-enabled --log-driver=journald --signature-verification=false&apos;</div><div class="line">OPTIONS=&apos;--selinux-enabled -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock&apos;</div><div class="line">if [ -z &quot;$&#123;DOCKER_CERT_PATH&#125;&quot; ]; then</div><div class="line">    DOCKER_CERT_PATH=/etc/docker</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h4 id="启动Docker"><a href="#启动Docker" class="headerlink" title="启动Docker"></a>启动Docker</h4><p>安装配置完毕后，启动docker服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl start docker.service</div><div class="line">systemctl status docker.service</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="Docker命令"><a href="#Docker命令" class="headerlink" title="Docker命令"></a>Docker命令</h3><p>学习docker命令前，我们需要先了解docker的基础理论，docker中有一个镜像的概念，顾名思义即是一个副本，可以将运行的进程打包成一个docker镜像，docker就是运行这些镜像的容器</p>
+<h4 id="docker-pull"><a href="#docker-pull" class="headerlink" title="docker pull"></a>docker pull</h4><p>拉取docker镜像，可指定镜像仓库以及版本，默认docker.io里的latest</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#docker pull daocloud.io/library/mysql:5.7.13</div><div class="line">@loca ➜  ~  docker pull mysql</div><div class="line">Using default tag: latest</div><div class="line">Trying to pull repository docker.io/library/mysql ...</div><div class="line">sha256:xxxxx: Pulling from docker.io/library/mysql</div><div class="line">6d827a3ef358: Downloading [====&gt;                                              ] 4.718 MB/51.44 MB</div><div class="line">ed0929eb7dfe: Download complete</div><div class="line">03f348dc3b9d: Download complete</div><div class="line">fd337761ca76: Download complete</div><div class="line">7e6cc16d464a: Downloading [========&gt;                                          ] 1.834 MB/10.65 MB</div><div class="line">ca3d380bc018: Download complete</div><div class="line">23c12ddae61f: Waiting</div><div class="line">14553c628372: Waiting</div><div class="line">c9445076b453: Waiting</div><div class="line">8feabd297745: Waiting</div><div class="line">835cd3cde5d5: Waiting</div></pre></td></tr></table></figure>
+<h4 id="docker-run"><a href="#docker-run" class="headerlink" title="docker run"></a>docker run</h4><p>运行docker镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 9160:9160 --name=cassandra registry.aliyuncs.com/daydayup/cassandra</div></pre></td></tr></table></figure>
+<h4 id="docker-ps"><a href="#docker-ps" class="headerlink" title="docker ps"></a>docker ps</h4><p>查看docker运行镜像<br>查看所有启动过的镜像，包括挂掉的镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker ps -a</div><div class="line">`</div></pre></td></tr></table></figure>
+<h4 id="docker-stop、docker-restart、docker-rm"><a href="#docker-stop、docker-restart、docker-rm" class="headerlink" title="docker stop、docker restart、docker rm"></a>docker stop、docker restart、docker rm</h4><p>docker镜像的启停与进程的移除<br>移除所有停掉的镜像进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker rm `docker ps -a -q`</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>总体来说docker对于开发者来说是非常方便，快速的环境搭建与启停，能为开发人员节省不少开发时间的，最后，这篇分享docker只是一个入门，满足基本日常使用，还有更多丰富的功能等待以后深入学习~</p>
+
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2016. Raymon ❤ Sunny | Hexo</span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1ebdc2e5c3ef0e1ca01b5ed227ddd88f";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+    <script src="/js/jquery.githubRepoWidget.min.js"></script>
+
+
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      Git 基础命令 | Raymon 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="lemin">
+    
+    
+
+    <meta name="description" content="原文地址">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git 基础命令 | Raymon">
+<meta property="og:url" content="http://yoursite.com/2016/08/27/git-cmd/index.html">
+<meta property="og:site_name" content="Raymon">
+<meta property="og:description" content="原文地址">
+<meta property="og:updated_time" content="2017-05-19T12:59:03.355Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git 基础命令 | Raymon">
+<meta name="twitter:description" content="原文地址">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+        <a href="/" title="link to homepage for Raymon"><img src="/avatar.png" width="80" alt="Raymon logo" class="panel-cover__logo logo" /></a>
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Raymon</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          zero to hero
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Git 基础命令</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-08-27" class="post-meta__date date">2016-08-27</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/git/">git</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p><a href="http://blog.csdn.net/czhpxl007/article/details/51249980" target="_blank" rel="external">原文地址</a></p>
+<a id="more"></a>
+<blockquote>
+<p><strong> 转自公司老司机博客~~ 感觉很实用, 因此做个记录 </strong></p>
+</blockquote>
+<h2 id="Git-初始化"><a href="#Git-初始化" class="headerlink" title="Git 初始化"></a>Git 初始化</h2><ul>
+<li>Create a new repository</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git clone git@*******/test.git</div><div class="line">cd test</div><div class="line">touch README.md</div><div class="line">git add README.md</div><div class="line">git commit -m &quot;add README&quot;</div><div class="line">git push -u origin master</div></pre></td></tr></table></figure>
+<ul>
+<li>Existing folder or Git repository</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cd existing_folder</div><div class="line">git init</div><div class="line">git remote add origin git@@*******/test.git</div><div class="line">git add .</div><div class="line">git commit</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="Git-Config"><a href="#Git-Config" class="headerlink" title="Git Config"></a>Git Config</h2><ul>
+<li>config 配置文件位置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/etc/gitconfig --All User</div><div class="line">~/.gitconfig --Current User</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="Git-基础命令"><a href="#Git-基础命令" class="headerlink" title="Git 基础命令"></a>Git 基础命令</h2><ul>
+<li>git status git文件状态如下所示。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">unstaged - git仓库中没有此文件的相关记录 </div><div class="line">modified - git仓库中有这个文件的记录，且此文件当前有改动 </div><div class="line">staged - 变更的文件被暂存,没有提交到仓库 (git add命令之后)</div><div class="line">commited - 文件被提交到本地git仓库 (git commit之后)</div></pre></td></tr></table></figure>
+<ul>
+<li>git add</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add file/fileDir         #modified或unstaged的文件转换为staged状态</div><div class="line">git add -A/--all             #modified或unstaged的所有文件转换为staged状态</div></pre></td></tr></table></figure>
+<ul>
+<li>git rm</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git rm test.java             #从git仓库删除test.java文件，同时删除本地文件</div><div class="line">git rm  --cache test.java    #从git仓库删除test.java文件，不删除本地文件</div></pre></td></tr></table></figure>
+<ul>
+<li>git commit</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -m &quot;xxx comment&quot;    #staged状态转换为commited状态</div></pre></td></tr></table></figure>
+<ul>
+<li>git diff</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git diff file-path           #查看自己本次要提交的文件有哪些改动</div></pre></td></tr></table></figure>
+<ul>
+<li>git pull</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull [remote-name branch-name]  #获取远程服务器数据,并同时与本地数据合并(可能会出现冲突)</div></pre></td></tr></table></figure>
+<ul>
+<li>git fetch</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git fetch [remote-name]     #(获取仓库的所有更新，但是不自动合并当前分支)</div><div class="line">git fetch -p                #(获取仓库的所有更新，且自动删除不需要的分支，更新最新的分支下来)</div></pre></td></tr></table></figure>
+<ul>
+<li>git push</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git push [remote-name branch-name]         #上传数据到远程分支，若出现冲突，则上传失败。</div><div class="line">git push --force [remote-name branch-name] #强制上传数据到远程分支，(覆盖远程数据，慎用)</div></pre></td></tr></table></figure>
+<ul>
+<li>git stash 可用来暂存当前正在进行的工作，比commit简单，而且可以跨分支合并</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">git stash                    #暂存更改的内容</div><div class="line">git stash save &quot;comment&quot;     #暂存更改的内容,带注释</div><div class="line">git stash list               #显示所有暂存的内容 </div><div class="line"> </div><div class="line">git show stash@&#123;0&#125;           #显示指定stash的更改内容，类似于git diff </div><div class="line"></div><div class="line">git stash apply stash@&#123;1&#125;    #应用指定编号的stash, 但不从stash-list中清除</div><div class="line">git stash pop                #应用栈顶的stash,并从stash-list清除该记录</div><div class="line">git stash clear              #清除stash-list</div><div class="line"></div><div class="line">git stash --help             #获取更多的信息</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="Git-分支"><a href="#Git-分支" class="headerlink" title="Git 分支"></a>Git 分支</h2><ul>
+<li>git branch</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git branch                  #查看本地分支列表</div><div class="line">git branch -r               #查看远程分支列表</div><div class="line">git branch -a               #查看所有分支</div><div class="line">git branch -d branch-name   #删除指定分支</div><div class="line">git branch -D branch-name   #强制删除指定分支</div></pre></td></tr></table></figure>
+<ul>
+<li>git checkout</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git checkout branch-name                         #切换到指定分支 (切换前记得先commit或者stash)</div><div class="line">git checkout -b new-branch-name                  #基于当前分支创建一个新分支</div><div class="line">git checkout -b branch-name origin/branch-name   #获取远程分支到本地 </div><div class="line">git checkout file-name                           #获取远程最新文件</div><div class="line">git checkout -- .                                #放弃本地所有的modify文件改动</div></pre></td></tr></table></figure>
+<ul>
+<li>add remote branch</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1.git checkout branch-name              #切换到要上传的分支</div><div class="line">2.git remote add origin branch-name     #添加远程分支</div><div class="line">3.git push origin branch-name            #推送数据到远程分支 (自动创建分支，step2可省去)</div></pre></td></tr></table></figure>
+<ul>
+<li>delete remote branch</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin :remote-branch         #删除指定远程分支</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="Git-分支合并"><a href="#Git-分支合并" class="headerlink" title="Git 分支合并"></a>Git 分支合并</h2><ul>
+<li>git merge</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git merge branch-name                 #合并指定分支内容到当前分支</div><div class="line">git add -A                            #手动解决冲突后,重新暂存</div><div class="line">git commit -m &quot;xxx 解决冲突&quot;           #再次提交</div></pre></td></tr></table></figure>
+<ul>
+<li>git cherry-pick</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git cherry-pick commit-id         #合并指定commit到当前分支</div><div class="line">git add -A                        #手动解决冲突后, 重新暂存</div><div class="line">git cherry-pick -- continue       #继续刚才的pick操作，这一步容易忘记</div><div class="line">git cherry-pick -- abort          #放弃cherry-pick操作</div></pre></td></tr></table></figure>
+<h2 id="Git-修改与撤销"><a href="#Git-修改与撤销" class="headerlink" title="Git 修改与撤销"></a>Git 修改与撤销</h2><ul>
+<li>git reset</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">git reset HEAD file          #将文件从staged转换为unstaged</div><div class="line">git reset HEAD .             #将所有文件从staged转换为unstaged</div><div class="line">git reset --mixed commit-id  #默认方式，回退到指定个版本，只保留源码，回退commit和index信息</div><div class="line"></div><div class="line">git reset --soft commit-id   #回退到某个版本，只回退了commit的信息，</div><div class="line">                             #不会恢复到index file级。如果还要提交，直接commit即可   </div><div class="line"></div><div class="line">git reset --hard commit-id   #彻底回退到某个版本，本地的源码也会变为上一个版本的内容</div></pre></td></tr></table></figure>
+<ul>
+<li>git reflog</li>
+</ul>
+<p>显示所有过去commit历史，可用来挽救–hard的误操作</p>
+<ul>
+<li>git rebase</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(1) git rebase -i commit-id   #在vi编辑器中，显示commit-id到最新的所有commit记录</div><div class="line">(2) git rebase -i HEAD~10     #在vi编辑器中，显示最新10条commit记录</div><div class="line">(3) 在vi编辑器中, 修改commit内容, wq保存</div><div class="line">(4) git add -A                #解决冲突后，暂存文件</div><div class="line">(5) git rebase --continue     #完成未完成rebase操作</div><div class="line">(6) git rebase --abort        #完成未完成rebase操作</div></pre></td></tr></table></figure>
+<p>在vim编辑器中,常见几种操作方式，显示如下，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"># 修改前</div><div class="line">pick 8e5da5f test-comment-1 </div><div class="line">pick 627a433 test-comment-2 </div><div class="line">pick 627a433 test-comment-3 </div><div class="line">pick dcc8310 test-comment-4 </div><div class="line"># commit-id更改</div><div class="line">pick 8e5da5f test-comment-1 </div><div class="line">pick 627a433 test-comment-2 </div><div class="line">r 627a433 修改后的内容 </div><div class="line">pick dcc8310 test-comment-4 </div><div class="line"># commit-id换序</div><div class="line">pick 8e5da5f test-comment-1 </div><div class="line">pick 627a433 test-comment-3 </div><div class="line">pick 627a433 test-comment-2 </div><div class="line">pick dcc8310 test-comment-4 </div><div class="line"># commit-id删除 </div><div class="line">pick 8e5da5f test-comment-1 </div><div class="line">pick 627a433 test-comment-2 </div><div class="line">pick dcc8310 test-comment-4 </div><div class="line"># commit-id 3 与 4合并</div><div class="line">pick 8e5da5f test-comment-1 </div><div class="line">pick 627a433 test-comment-2 </div><div class="line">pick 627a433 test-comment-3 </div><div class="line">s dcc8310 test-comment-4</div></pre></td></tr></table></figure>
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2016. Raymon ❤ Sunny | Hexo</span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1ebdc2e5c3ef0e1ca01b5ed227ddd88f";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+    <script src="/js/jquery.githubRepoWidget.min.js"></script>
+
+
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
