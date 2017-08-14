@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      JVM参数解析与调优 | Raymon 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="lemin">
+    
+    
+
+    <meta name="description" content="引言JVM 全称 Java Virtual Machine，Java程序编译之后生成的.class文件就是交由JVM执行，由JVM将.class文件内容翻译成对于系统可识别的机器语言，这就是Java之所以能一次编译，到处运行。
+关于JVM配置以及调优是Java程序员进阶必须掌握的，一个优秀的Java程序员可以根据运行环境设置JVM参数，从而达到最优配置，合理充分的利用系统资源，避免生产环境发生一些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM参数解析与调优 | Raymon">
+<meta property="og:url" content="http://yoursite.com/2017/06/28/jvm/index.html">
+<meta property="og:site_name" content="Raymon">
+<meta property="og:description" content="引言JVM 全称 Java Virtual Machine，Java程序编译之后生成的.class文件就是交由JVM执行，由JVM将.class文件内容翻译成对于系统可识别的机器语言，这就是Java之所以能一次编译，到处运行。
+关于JVM配置以及调优是Java程序员进阶必须掌握的，一个优秀的Java程序员可以根据运行环境设置JVM参数，从而达到最优配置，合理充分的利用系统资源，避免生产环境发生一些">
+<meta property="og:image" content="http://yoursite.com/images/jmap-1.png">
+<meta property="og:image" content="http://yoursite.com/images/堆内存.png">
+<meta property="og:updated_time" content="2017-08-14T12:33:39.204Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVM参数解析与调优 | Raymon">
+<meta name="twitter:description" content="引言JVM 全称 Java Virtual Machine，Java程序编译之后生成的.class文件就是交由JVM执行，由JVM将.class文件内容翻译成对于系统可识别的机器语言，这就是Java之所以能一次编译，到处运行。
+关于JVM配置以及调优是Java程序员进阶必须掌握的，一个优秀的Java程序员可以根据运行环境设置JVM参数，从而达到最优配置，合理充分的利用系统资源，避免生产环境发生一些">
+<meta name="twitter:image" content="http://yoursite.com/images/jmap-1.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+        <a href="/" title="link to homepage for Raymon"><img src="/avatar.png" width="80" alt="Raymon logo" class="panel-cover__logo logo" /></a>
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Raymon</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          zero to hero
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">JVM参数解析与调优</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-06-28" class="post-meta__date date">2017-06-28</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/java/">java</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>JVM 全称 Java Virtual Machine，Java程序编译之后生成的.class文件就是交由JVM执行，由JVM将.class文件内容翻译成对于系统可识别的机器语言，这就是Java之所以能一次编译，到处运行。</p>
+<p>关于JVM配置以及调优是Java程序员进阶必须掌握的，一个优秀的Java程序员可以根据运行环境设置JVM参数，从而达到最优配置，合理充分的利用系统资源，避免生产环境发生一些如OOM的异常或者线程死锁、Java进程CPU消耗过高等问题</p>
+<h3 id="JVM调试工具"><a href="#JVM调试工具" class="headerlink" title="JVM调试工具"></a>JVM调试工具</h3><p><br></p>
+<h4 id="jps-JVM-Process-Status-Tool"><a href="#jps-JVM-Process-Status-Tool" class="headerlink" title="jps (JVM Process Status Tool)"></a><em>jps (JVM Process Status Tool)</em></h4><p> <em>— 输出jvm运行的java进程状态信息</em></p>
+<p>命令格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jps [options] [hostId]</div></pre></td></tr></table></figure>
+<p>hostId缺省值为当前主机<br>命令指令包括：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-q 不输出类名、Jar名和传入main方法的参数</div><div class="line">-m 输出传入main方法的参数</div><div class="line">-l 输出main类或Jar的全限名</div><div class="line">-v 输出传入JVM的参数</div></pre></td></tr></table></figure>
+<p>使用如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]#</div><div class="line">[root@localhost ~]# jps -m -l</div><div class="line">28353 uyun.bat.monitor.impl.Startup</div><div class="line">22852 uyun.bat.datastore.Startup</div><div class="line">25799 uyun.bat.event.impl.Startup</div><div class="line">19976 /opt/uyun/platform/jetty/start.jar</div><div class="line">29320 uyun.bat.report.Startup</div></pre></td></tr></table></figure>
+<p><br></p>
+<h4 id="jstack"><a href="#jstack" class="headerlink" title="jstack"></a><em>jstack</em></h4><p> <em>— 输出具体java进程内线程堆栈信息</em></p>
+<p>jstask应该是比较常用的JVM调试工具，命令格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jstack [option] [pid]</div></pre></td></tr></table></figure>
+<p>命令指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-l long listings 打印线程锁信息，发生死锁时可以使用该参数调试</div><div class="line">-m mixed mode 不仅输出java堆栈信息，还会输出C/C++堆栈信息</div></pre></td></tr></table></figure>
+<p>实际应用例子: 查看进程最占CPU的线程堆栈信息</p>
+<ol>
+<li><p>ps -ef | grep 查找对应进程，或者top命令查看系统使用信息，找出消耗最大的进程，我这里使用的是top命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">top - 07:38:01 up 3 days,  6:20,  5 users,  load average: 15.72, 15.02, 14.14</div><div class="line">Tasks: 148 total,   7 running, 141 sleeping,   0 stopped,   0 zombie</div><div class="line">%Cpu(s): 71.2 us, 26.1 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  2.7 si,  0.0 st</div><div class="line">KiB Mem:  20397888 total, 20124388 used,   273500 free,        0 buffers</div><div class="line">KiB Swap:  1081340 total,  1081340 used,        0 free.  2163376 cached Mem</div><div class="line"></div><div class="line">  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND</div><div class="line">24152 es        20   0 3323892 492160  28496 S 35.7  2.4   1613:51 java</div><div class="line"> 3247 mysql     20   0 1152924 297932   5836 S  9.9  1.5 418:51.47 mysqld</div><div class="line">20009 root      20   0 3688420 1.563g  13132 S  7.9  8.0 653:51.83 java</div><div class="line">22852 root      20   0 3450392 546480  12828 S  7.6  2.7 322:33.85 java</div><div class="line"> 5779 root      20   0 3652656 1.114g   4976 S  4.3  5.7 109:57.89 java</div><div class="line">28353 root      20   0 3624988 337680  12824 S  3.3  1.7 125:49.11 java</div><div class="line">  268 root       0 -20       0      0      0 S  2.3  0.0  43:33.35 kworker/0:1H</div><div class="line">11539 root      20   0  369916  14108   4020 R  2.0  0.1   0:00.06 python</div><div class="line">25799 root      20   0 3356336 475416  12832 S  1.7  2.3  64:56.00 java</div><div class="line"> 1544 root      20   0  247448  27916   1144 S  1.3  0.1  56:24.67 redis-server</div><div class="line">11540 root      20   0  131528   5048   3880 S  1.3  0.0   0:00.04 sshd</div><div class="line">21497 root      20   0 3306144 313020  12712 S  1.0  1.5  20:59.73 java</div><div class="line">    1 root      20   0  133816   6772   2084 S  0.7  0.0  40:38.49 systemd</div></pre></td></tr></table></figure>
+<p>经过top命令查找，最占内存的是一个Java进程，进程id为24152，占用内存达到35.7%，经过ps -ef|grep pid查看，这个进程是ElasticSearch进程</p>
+</li>
+<li><p>第二步我们需要查找该进程内最耗费CPU的线程，可以使用ps -Lfp pid, ps -mp pif -o THREAD, top -Hp pid，这里我们用第三个命令，top -Hp 24152</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">top - 07:44:20 up 3 days,  6:27,  5 users,  load average: 19.72, 15.50, 14.42</div><div class="line">Threads:  40 total,   1 running,  39 sleeping,   0 stopped,   0 zombie</div><div class="line">%Cpu(s): 64.3 us, 32.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  3.7 si,  0.0 st</div><div class="line">KiB Mem:  20397888 total, 19894260 used,   503628 free,        0 buffers</div><div class="line">KiB Swap:  1081340 total,  1081340 used,        0 free.  1994824 cached Mem</div><div class="line"></div><div class="line">  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND</div><div class="line">24937 es        20   0 3319268 485312  21512 R 23.0  2.4 748:12.71 java</div><div class="line">24953 es        20   0 3319268 485312  21512 S  4.3  2.4 151:27.67 java</div><div class="line">24157 es        20   0 3319268 485312  21512 S  3.0  2.4 142:46.82 java</div><div class="line">24459 es        20   0 3319268 485312  21512 S  0.3  2.4   1:58.92 java</div><div class="line">24876 es        20   0 3319268 485312  21512 S  0.3  2.4  16:58.66 java</div><div class="line">24152 es        20   0 3319268 485312  21512 S  0.0  2.4   0:00.00 java</div><div class="line">24154 es        20   0 3319268 485312  21512 S  0.0  2.4   0:02.02 java</div><div class="line">24155 es        20   0 3319268 485312  21512 S  0.0  2.4   0:00.00 java</div><div class="line">24156 es        20   0 3319268 485312  21512 S  0.0  2.4  42:25.76 java</div><div class="line">24158 es        20   0 3319268 485312  21512 S  0.0  2.4   0:31.47 java</div></pre></td></tr></table></figure>
+<p>这里我们看到最耗费性能的线程pid为24937</p>
+</li>
+<li><p>第三步先获取线程id 24937的十六进制值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# printf &quot;%x\n&quot; 24937</div><div class="line">6169</div></pre></td></tr></table></figure>
+<p>接着使用jstack来输出线程id 24937的堆栈信息，根据线程id的十六进制值grep</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jstack 24152 | grep 6169</div></pre></td></tr></table></figure>
+<p>这里我遇到一个问题，执行jstack命令后系统并没有返回jvm信息，而是给出一个报错信息:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Unable to open socket file: target process not responding or HotSpot VM not loaded</div></pre></td></tr></table></figure>
+<p>之所以会报这个找不到文件的错误，首先我们得知道jvm运行时会生成一个hsperfdata_$user的目录，Linux下默认是在/tmp，我们也可以通过配置jvm启动参数-Djava.io.tmpdir来指定进程号信息临时文件的存放位置，检查过之后确认 /tmp下有生成目录hsperfdata_es</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@localhost hsperfdata_es]# pwd</div><div class="line">/tmp/hsperfdata_es</div><div class="line">[root@localhost hsperfdata_es]# ls</div><div class="line">24152</div><div class="line">[root@localhost hsperfdata_es]#</div></pre></td></tr></table></figure>
+<p>那之所以jstack会报错找不到文件，原因是ElasticSearch进程是使用es用户启动的，而我们登录的是root账号，因此访问不到这个文件，切换用户为es后再次使用jstack打印线程堆栈信息:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@localhost hsperfdata_es]# su es</div><div class="line">[es@localhost hsperfdata_es]$ jstack 24152 | grep 6169</div><div class="line">&quot;elasticsearch[Grenade][bulk][T#1]&quot; #49 daemon prio=5 os_prio=0 tid=0x00007f78440b2000 nid=0x6169 runnable [0x00007f7840fa1000]</div><div class="line">[es@localhost hsperfdata_es]$</div></pre></td></tr></table></figure>
+<p>打印出该线程信息，显示该线程是runnable正常运行的就绪状态，经查看详细堆栈信息，应该是es内部创建分片索引的进程，因此占用比较多性能<br><br></p>
+</li>
+</ol>
+<h4 id="jmap-jhat"><a href="#jmap-jhat" class="headerlink" title="jmap jhat"></a><em>jmap jhat</em></h4><p> <em>— jmap 输出堆内存使用情况</em><br> <em>— jhat java堆内存分析工具</em></p>
+<p>jmap和jhat经常在一起被使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jmap -hap pid</div></pre></td></tr></table></figure>
+<p>用于查看进程堆内存使用情况，包括堆配置参数和各代中堆内存使用情况，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">whale.server01:/root# jmap -heap 17047</div><div class="line">Attaching to process ID 17047, please wait...</div><div class="line">Debugger attached successfully.</div><div class="line">Server compiler detected.</div><div class="line">JVM version is 25.77-b03</div><div class="line"></div><div class="line">using thread-local object allocation.</div><div class="line">Parallel GC with 4 thread(s)</div><div class="line"></div><div class="line">Heap Configuration:</div><div class="line">   MinHeapFreeRatio         = 0</div><div class="line">   MaxHeapFreeRatio         = 100</div><div class="line">   MaxHeapSize              = 1073741824 (1024.0MB)</div><div class="line">   NewSize                  = 175112192 (167.0MB)</div><div class="line">   MaxNewSize               = 357564416 (341.0MB)</div><div class="line">   OldSize                  = 351272960 (335.0MB)</div><div class="line">   NewRatio                 = 2</div><div class="line">   SurvivorRatio            = 8</div><div class="line">   MetaspaceSize            = 21807104 (20.796875MB)</div><div class="line">   CompressedClassSpaceSize = 1073741824 (1024.0MB)</div><div class="line">   MaxMetaspaceSize         = 134217728 (128.0MB)</div><div class="line">   G1HeapRegionSize         = 0 (0.0MB)</div><div class="line"></div><div class="line">Heap Usage:</div><div class="line">PS Young Generation</div><div class="line">Eden Space:</div><div class="line">   capacity = 70254592 (67.0MB)</div><div class="line">   used     = 22570248 (21.52466583251953MB)</div><div class="line">   free     = 47684344 (45.47533416748047MB)</div><div class="line">   32.126366914208255% used</div><div class="line">From Space:</div><div class="line">   capacity = 9961472 (9.5MB)</div><div class="line">   used     = 6859688 (6.541908264160156MB)</div><div class="line">   free     = 3101784 (2.9580917358398438MB)</div><div class="line">   68.86219225431743% used</div><div class="line">To Space:</div><div class="line">   capacity = 10485760 (10.0MB)</div><div class="line">   used     = 0 (0.0MB)</div><div class="line">   free     = 10485760 (10.0MB)</div><div class="line">   0.0% used</div><div class="line">PS Old Generation</div><div class="line">   capacity = 184025088 (175.5MB)</div><div class="line">   used     = 99082056 (94.49201202392578MB)</div><div class="line">   free     = 84943032 (81.00798797607422MB)</div><div class="line">   53.841602292835205% used</div><div class="line"></div><div class="line">24334 interned Strings occupying 2508568 bytes.</div></pre></td></tr></table></figure>
+<p>使用jmap -histo[:live] pid查看堆内存中的对象数目、大小统计直方图，如果带上live则只统计活对象，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">whale.server01:/root# jmap -histo:live 17047 | more</div><div class="line"></div><div class="line"> num     #instances         #bytes  class name</div><div class="line">----------------------------------------------</div><div class="line">   1:         77521        8038136  [C</div><div class="line">   2:          1056        2890752  [J</div><div class="line">   3:          6362        2595656  [B</div><div class="line">   4:          5812        1968312  [I</div><div class="line">   5:         76614        1838736  java.lang.String</div><div class="line">   6:         19709        1734392  java.lang.reflect.Method</div><div class="line">   7:         18318        1268024  [Ljava.lang.Object;</div><div class="line">   8:         10179        1136280  java.lang.Class</div><div class="line">   9:         33025        1056800  java.util.concurrent.ConcurrentHashMap$Node</div><div class="line">  10:         12388         594624  org.aspectj.weaver.reflect.ShadowMatchImpl</div><div class="line">  11:         16901         540832  java.util.HashMap$Node</div><div class="line">  12:         12304         492160  java.util.LinkedHashMap$Entry</div><div class="line">  13:         12388         396416  org.aspectj.weaver.patterns.ExposedState</div><div class="line">  14:          2633         352464  [Ljava.util.HashMap$Node;</div><div class="line">  15:         11008         352256  java.util.Hashtable$Entry</div><div class="line">  16:           436         330440  [Ljava.util.concurrent.ConcurrentHashMap$Node;</div><div class="line">  17:         13383         321192  java.util.ArrayList</div><div class="line">  18:          9319         298208  java.lang.ref.WeakReference</div><div class="line">  19:           741         278616  java.lang.Thread</div><div class="line">  20:         17352         277632  java.lang.Object</div><div class="line">  21:          5707         228280  java.lang.ref.SoftReference</div><div class="line">  22:          3612         173376  java.util.HashMap</div><div class="line">  23:           302         164288  rx.internal.util.unsafe.SpscArrayQueue</div><div class="line">  24:          5104         163328  java.util.concurrent.locks.ReentrantLock$NonfairSync</div><div class="line">  25:          2872         160832  java.util.LinkedHashMap</div><div class="line">  26:          4784         153088  java.lang.ThreadLocal$ThreadLocalMap$Entry</div><div class="line">  27:          1828         146240  java.lang.reflect.Constructor</div><div class="line">  28:          1473         139856  [Ljava.lang.ThreadLocal$ThreadLocalMap$Entry;</div><div class="line">  29:          5152         123648  java.beans.MethodRef</div><div class="line">  30:          3831         119752  [Z</div><div class="line">  31:          5550         118632  [Ljava.lang.Class;</div><div class="line">  32:          2003         112168  java.security.Provider$Service</div><div class="line">  33:           464         107616  [Ljava.util.Hashtable$Entry;</div></pre></td></tr></table></figure>
+<p>附class对象说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">B  byte</div><div class="line">C  char</div><div class="line">D  double</div><div class="line">F  float</div><div class="line">I  int</div><div class="line">J  long</div><div class="line">Z  boolean</div><div class="line">[  数组，如[I表示int[]</div><div class="line">[L+类名 其他对象</div></pre></td></tr></table></figure>
+<p>另一个场景是用jmap dump出进程内存使用情况，然后使用jhat分析。命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">whale.server01:/root# jmap -dump:format=b,file=/tmp/dump.dat 17047</div><div class="line">Dumping heap to /tmp/dump.dat ...</div><div class="line">Heap dump file created</div></pre></td></tr></table></figure>
+<p>使用jhat查看：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jhat -port 9998 /tmp/dump.dat</div></pre></td></tr></table></figure>
+<p>执行完后在浏览器中打开 <a href="http://ip:9998" target="_blank" rel="external">http://ip:9998</a> 进行查看结果</p>
+<p><img src="/images/jmap-1.png" alt=""></p>
+<p><br></p>
+<h4 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a><em>jstat</em></h4><p> <em>— 输出jvm内存使用情况</em></p>
+<p>jstat 监控系统主题资源使用情况，无法定位到具体的Java应用情况；使用语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jstat -&lt;option&gt; [-t] [-h&lt;lines&gt;] &lt;vmid&gt; [&lt;interval&gt; [&lt;count&gt;]]</div></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="JVM参数"><a href="#JVM参数" class="headerlink" title="JVM参数"></a>JVM参数</h3><p><br></p>
+<h4 id="JVM堆内存"><a href="#JVM堆内存" class="headerlink" title="JVM堆内存"></a>JVM堆内存</h4><p>整个堆大小 = 年轻代(Young Generation) + 年老代(Old Generation) + 持久代(Perm Area)<br>JVM堆内存用与new创建的对象和数组，栈内存则用于分配基础类型变量和对象的引用，当程序运行到作用域外时，栈内引用将被释放，而失去了引用地址的堆内存里的对象则变为了垃圾，在未知时间被GC回收释放内存；</p>
+<p> 堆内存构成图：<br> <img src="/images/堆内存.png" alt="堆内存"></p>
+<ul>
+<li><p>-Xms 初始堆大小<br>默认物理内存的1/64(小于1GB)空余堆大小小于40%时，JVM就会增大堆直到-Xmx的最大限制</p>
+</li>
+<li><p>-Xmx 最大堆大小<br>默认物理内存的1/4(小于1GB)空余堆大小大于70%时，JVM就会减少堆直到-Xms的最小限制</p>
+<p>我们可以通过将“-Xms”和“-Xmx”设置为相同大小来获得一个固定大小的堆内存。 -Xms和-Xmx实际上是-XX:InitialHeapSize和-XX:MaxHeapSize的缩写。我们也可以直接使用这两个参数，它们所起得效果是一样的</p>
+</li>
+<li><p>-Xmn 年轻代大小</p>
+</li>
+<li><p>-XX:NewSize 设置年轻代初始大小</p>
+</li>
+<li><p>-XX:MaxNewSize 年轻代最大值</p>
+</li>
+<li><p>-XX:PermSize 设置持久代初始值</p>
+</li>
+<li><p>-XX:MaxPermSize 设置持久代最大值</p>
+</li>
+<li><p>-Xss 每个线程堆栈大小<br>JDK5.0以后每个线程堆栈大小为1M，以前每个线程堆栈大小为256K，这个参数对影响比较大，需经过严格测试后进行调整</p>
+</li>
+<li><p>-XX:NewRatio 年轻代(包括Eden和两个Survivor区)与年老代的比值(除去持久代)<br>-XX:NewRatio=4表示年轻代与年老代所占比值为1:4,年轻代占整个堆栈的1/5，Xms=Xmx并且设置了Xmn的情况下，该参数不需要进行设置。</p>
+</li>
+<li><p>-XX:SurvivorRatio Eden区与Survivor区的大小比值<br>设置为8,则两个Survivor区与一个Eden区的比值为2:8,一个Survivor区占整个年轻代的1/10</p>
+</li>
+<li><p>-XX:+HeapDumpOnOutOfMemoryError and -XX:HeapDumpPath<br>当我们没法为-Xmx（最大堆内存）设置一个合适的大小，那么就有可能面临内存溢出（OutOfMemoryError）的风险，这可能是我们使用JVM时面临的最可怕的猛兽之一导致内存溢出的根本原因需要仔细的定位。通常来说，分析堆内存快照（Heap Dump）是一个很好的定位手段，如果发生内存溢出时没有生成内存快照，特别是对于那种JVM已经崩溃或者错误只出现在顺利运行了数小时甚至数天的生产系统上时，将很难去分析崩溃问题。</p>
+<p>幸运的是，我们可以通过设置 -XX:+HeapDumpOnOutOfMemoryError 让JVM在发生内存溢出时自动的生成堆内存快照。有了这个参数，当我们不得不面对内存溢出异常的时候会节约大量的时间。默认情况下，堆内存快照会保存在JVM的启动目录下名为java_pid<pid>.hprof 的文件里（在这里<pid>就是JVM进程的进程号）。也可以通过设置-XX:HeapDumpPath=<path></path>来改变默认的堆内存快照生成路径，<path></path>可以是相对或者绝对路径。</pid></pid></p>
+</li>
+</ul>
+<p><br></p>
+<p> 引用：<br> <a href="http://ifeve.com/useful-jvm-flags-part-4-heap-tuning/" target="_blank" rel="external">JVM实用参数内存调优</a><br> <a href="http://blog.csdn.net/wisgood/article/details/25343845" target="_blank" rel="external">JVM性能调优监控工具</a></p>
+
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2016. Raymon ❤ Sunny | Hexo</span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1ebdc2e5c3ef0e1ca01b5ed227ddd88f";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+    <script src="/js/jquery.githubRepoWidget.min.js"></script>
+
+
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

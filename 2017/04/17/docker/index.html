@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/17/docker/index.html">
 <meta property="og:site_name" content="Raymon">
 <meta property="og:image" content="http://yoursite.com/images/docker.jpg">
-<meta property="og:updated_time" content="2017-05-23T05:09:16.023Z">
+<meta property="og:updated_time" content="2017-07-17T08:15:14.016Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker学习 | Raymon">
 <meta name="twitter:image" content="http://yoursite.com/images/docker.jpg">
@@ -202,6 +202,8 @@ classes that you can use:
 <h4 id="docker-stop、docker-restart、docker-rm"><a href="#docker-stop、docker-restart、docker-rm" class="headerlink" title="docker stop、docker restart、docker rm"></a>docker stop、docker restart、docker rm</h4><p>docker镜像的启停与进程的移除<br>移除所有停掉的镜像进程</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker rm `docker ps -a -q`</div></pre></td></tr></table></figure>
 <hr>
+<h4 id="docker-exec"><a href="#docker-exec" class="headerlink" title="docker exec"></a>docker exec</h4><p>进入指定docker容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker exec -it &#123;container_id or container_name&#125; /bin/bash</div></pre></td></tr></table></figure>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>总体来说docker对于开发者来说是非常方便，快速的环境搭建与启停，能为开发人员节省不少开发时间的，最后，这篇分享docker只是一个入门，满足基本日常使用，还有更多丰富的功能等待以后深入学习~</p>
 
   </section>
