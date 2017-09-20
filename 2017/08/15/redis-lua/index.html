@@ -7,7 +7,7 @@
     
 
     <title>
-      idea快捷操作记录 | Raymon 
+      Redis结合Lua解析 | Raymon 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,16 +16,16 @@
     
     
 
-    <meta name="description" content="持续更新, 喂丸待续..">
+    <meta name="description" content="首先redis作为一款优秀的缓存数据库，已成为许许多多大大小小的项目的必备底层数据库之一了，在我们使用redis时，有时会需要依赖redis来处理一段非常复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性，以及可能在高并发下产生脏数据；redis从2.6.0版本开始提供了一种新的解决方案，内置lu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="idea快捷操作记录 | Raymon">
-<meta property="og:url" content="http://yoursite.com/2016/12/20/idea/index.html">
+<meta property="og:title" content="Redis结合Lua解析 | Raymon">
+<meta property="og:url" content="http://yoursite.com/2017/08/15/redis-lua/index.html">
 <meta property="og:site_name" content="Raymon">
-<meta property="og:description" content="持续更新, 喂丸待续..">
-<meta property="og:updated_time" content="2017-05-19T13:05:42.100Z">
+<meta property="og:description" content="首先redis作为一款优秀的缓存数据库，已成为许许多多大大小小的项目的必备底层数据库之一了，在我们使用redis时，有时会需要依赖redis来处理一段非常复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性，以及可能在高并发下产生脏数据；redis从2.6.0版本开始提供了一种新的解决方案，内置lu">
+<meta property="og:updated_time" content="2017-08-17T12:17:21.455Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="idea快捷操作记录 | Raymon">
-<meta name="twitter:description" content="持续更新, 喂丸待续..">
+<meta name="twitter:title" content="Redis结合Lua解析 | Raymon">
+<meta name="twitter:description" content="首先redis作为一款优秀的缓存数据库，已成为许许多多大大小小的项目的必备底层数据库之一了，在我们使用redis时，有时会需要依赖redis来处理一段非常复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性，以及可能在高并发下产生脏数据；redis从2.6.0版本开始提供了一种新的解决方案，内置lu">
     
     
     
@@ -156,12 +156,12 @@ classes that you can use:
 
   <header class="post-header">
     
-    <h1 class="post-title">idea快捷操作记录</h1>
+    <h1 class="post-title">Redis结合Lua解析</h1>
 
     
 
     <div class="post-meta">
-      <time datetime="2016-12-20" class="post-meta__date date">2016-12-20</time> 
+      <time datetime="2017-08-15" class="post-meta__date date">2017-08-15</time> 
 
       <span class="post-meta__tags tags">
 
@@ -170,7 +170,7 @@ classes that you can use:
           
              &#8226; 标签:
             <font class="tags">
-              <a class="tags-link" href="/tags/java/">java</a>
+              <a class="tags-link" href="/tags/redis/">redis</a>
             </font>
           
 
@@ -182,13 +182,12 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <p>持续更新, 喂丸待续..</p>
-<a id="more"></a>
-<p>键入psv 生成main函数<br>键入sout 自动生成System.out.println();<br>键入psfs public static final String</p>
-<p>以下快捷键都是重设置过的, 请自行 keymap 查询 key 对应的快捷键进行设置<br>Paste from History : Ctrl+Shift+V<br>Find in Path : Ctrl+Shift+F/Ctrl+H<br>Find Usages : Ctrl+G<br>Recent Files : Ctrl+E<br>Generate : Ctrl+Shift+S<br>Reformat Code : Ctrl+Shift+L<br>Method Hierarchy(方法层级结构) Ctrl+Shift+H<br>生成代码块 Ctrl+Alt+T<br>查找类 Ctrl+Shift+T</p>
-<p>另外还有非常实用的两个快捷键<br>Search Everywhere : 双击Shift<br>Enter action or opion name : Ctrl + Shift + A<br>第一个是全局搜索任意文件名<br>第二个执行idea定义的指令，如generate、import、debug等等</p>
-<p>最后分享一个idea中文使用教程 IntelliJ-IDEA-Tutorial<br>喂丸…</p>
-
+    <h3 id="首先"><a href="#首先" class="headerlink" title="首先"></a>首先</h3><p>redis作为一款优秀的缓存数据库，已成为许许多多大大小小的项目的必备底层数据库之一了，在我们使用redis时，有时会需要依赖redis来处理一段非常复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性，以及可能在高并发下产生脏数据；<br>redis从2.6.0版本开始提供了一种新的解决方案，内置lua解释器，通过 redis Eval 命令来执行lua脚本，达到执行自定义逻辑的redis命令，并保障命令的原子性；</p>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>Eval 命令的基本语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">redis 127.0.0.1:6379&gt; EVAL script numkeys key [key ...] arg [arg ...]</div></pre></td></tr></table></figure></p>
+<p>如果我们想在lua脚本中调用redis的命令该如何操作？可以在脚本中使用redis.call()或redis.pcall()直接调用，两者用法类似，只是在遇到错误时，返回错误的提示方式不同。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">eval &quot;return redis.call(&apos;set&apos;,KEYS[1],&apos;bar&apos;)&quot; 1 foo</div></pre></td></tr></table></figure></p>
+<p>实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">10.109:9&gt;eval &quot;return &#123;KEYS[1],ARGV[1]&#125;&quot; 1 key1 ff</div><div class="line"> 1)  &quot;key1&quot;</div><div class="line"> 2)  &quot;ff&quot;</div></pre></td></tr></table></figure></p>
+<p>由于redis是单线程执行命令的，因此我们需要保证我们lua脚本足够精简，才不至于会阻塞redis线程，</p>
+<h3 id="项目应用"><a href="#项目应用" class="headerlink" title="项目应用"></a>项目应用</h3>
   </section>
 
   
@@ -197,7 +196,7 @@ classes that you can use:
     
 <section class="post-comments">
 
-    <div class="ds-thread" data-thread-key="2016/12/20/idea/"></div>
+    <div class="ds-thread" data-thread-key="2017/08/15/redis-lua/"></div>
 
     <!-- UY BEGIN -->
     <div id="uyan_frame"></div>
