@@ -24,7 +24,7 @@
 <meta property="og:description" content="背景redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性，以及可能在高并发下产生脏数据；redis从2.6.0版本">
 <meta property="og:image" content="http://yoursite.com/images/lua/redis_lua_1.png">
 <meta property="og:image" content="http://yoursite.com/images/lua/redis_lua_2.png">
-<meta property="og:updated_time" content="2017-11-15T10:35:00.618Z">
+<meta property="og:updated_time" content="2017-11-15T12:38:57.521Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis结合Lua解析 | Raymon">
 <meta name="twitter:description" content="背景redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性，以及可能在高并发下产生脏数据；redis从2.6.0版本">
@@ -186,6 +186,7 @@ classes that you can use:
 
   <section id="post-content" class="article-content post">
     <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性，以及可能在高并发下产生脏数据；redis从2.6.0版本开始提供了一种新的解决方案，内置lua解释器，通过 redis Eval 命令来执行lua脚本，达到执行自定义逻辑的redis命令，并保障命令的原子性；</p>
+<a id="more"></a>
 <h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>Eval 命令的基本语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">redis 127.0.0.1:6379&gt; EVAL script numkeys key [key ...] arg [arg ...]</div></pre></td></tr></table></figure></p>
 <p>如果我们想在lua脚本中调用redis的命令该如何操作？可以在脚本中使用redis.call()或redis.pcall()直接调用，两者用法类似，只是在遇到错误时，返回错误的提示方式不同。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">eval &quot;return redis.call(&apos;set&apos;,KEYS[1],&apos;bar&apos;)&quot; 1 foo</div></pre></td></tr></table></figure></p>
 <p>实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">10.109:9&gt;eval &quot;return &#123;KEYS[1],ARGV[1]&#125;&quot; 1 key1 ff</div><div class="line"> 1)  &quot;key1&quot;</div><div class="line"> 2)  &quot;ff&quot;</div></pre></td></tr></table></figure></p>

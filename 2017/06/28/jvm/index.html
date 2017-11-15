@@ -16,21 +16,18 @@
     
     
 
-    <meta name="description" content="引言JVM 全称 Java Virtual Machine，Java程序编译之后生成的.class文件就是交由JVM执行，由JVM将.class文件内容翻译成对于系统可识别的机器语言，这就是Java之所以能一次编译，到处运行。
-关于JVM配置以及调优是Java程序员进阶必须掌握的，一个优秀的Java程序员可以根据运行环境设置JVM参数，从而达到最优配置，合理充分的利用系统资源，避免生产环境发生一些">
+    <meta name="description" content="引言JVM 全称 Java Virtual Machine，Java程序编译之后生成的.class文件就是交由JVM执行，由JVM将.class文件内容翻译成对于系统可识别的机器语言，这就是Java之所以能一次编译，到处运行。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM参数解析与调优 | Raymon">
 <meta property="og:url" content="http://yoursite.com/2017/06/28/jvm/index.html">
 <meta property="og:site_name" content="Raymon">
-<meta property="og:description" content="引言JVM 全称 Java Virtual Machine，Java程序编译之后生成的.class文件就是交由JVM执行，由JVM将.class文件内容翻译成对于系统可识别的机器语言，这就是Java之所以能一次编译，到处运行。
-关于JVM配置以及调优是Java程序员进阶必须掌握的，一个优秀的Java程序员可以根据运行环境设置JVM参数，从而达到最优配置，合理充分的利用系统资源，避免生产环境发生一些">
+<meta property="og:description" content="引言JVM 全称 Java Virtual Machine，Java程序编译之后生成的.class文件就是交由JVM执行，由JVM将.class文件内容翻译成对于系统可识别的机器语言，这就是Java之所以能一次编译，到处运行。">
 <meta property="og:image" content="http://yoursite.com/images/jmap-1.png">
 <meta property="og:image" content="http://yoursite.com/images/堆内存.png">
-<meta property="og:updated_time" content="2017-08-14T12:33:39.204Z">
+<meta property="og:updated_time" content="2017-11-15T12:39:19.697Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM参数解析与调优 | Raymon">
-<meta name="twitter:description" content="引言JVM 全称 Java Virtual Machine，Java程序编译之后生成的.class文件就是交由JVM执行，由JVM将.class文件内容翻译成对于系统可识别的机器语言，这就是Java之所以能一次编译，到处运行。
-关于JVM配置以及调优是Java程序员进阶必须掌握的，一个优秀的Java程序员可以根据运行环境设置JVM参数，从而达到最优配置，合理充分的利用系统资源，避免生产环境发生一些">
+<meta name="twitter:description" content="引言JVM 全称 Java Virtual Machine，Java程序编译之后生成的.class文件就是交由JVM执行，由JVM将.class文件内容翻译成对于系统可识别的机器语言，这就是Java之所以能一次编译，到处运行。">
 <meta name="twitter:image" content="http://yoursite.com/images/jmap-1.png">
     
     
@@ -188,8 +185,7 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>JVM 全称 Java Virtual Machine，Java程序编译之后生成的.class文件就是交由JVM执行，由JVM将.class文件内容翻译成对于系统可识别的机器语言，这就是Java之所以能一次编译，到处运行。</p>
-<p>关于JVM配置以及调优是Java程序员进阶必须掌握的，一个优秀的Java程序员可以根据运行环境设置JVM参数，从而达到最优配置，合理充分的利用系统资源，避免生产环境发生一些如OOM的异常或者线程死锁、Java进程CPU消耗过高等问题</p>
+    <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>JVM 全称 Java Virtual Machine，Java程序编译之后生成的.class文件就是交由JVM执行，由JVM将.class文件内容翻译成对于系统可识别的机器语言，这就是Java之所以能一次编译，到处运行。<br><a id="more"></a><br>关于JVM配置以及调优是Java程序员进阶必须掌握的，一个优秀的Java程序员可以根据运行环境设置JVM参数，从而达到最优配置，合理充分的利用系统资源，避免生产环境发生一些如OOM的异常或者线程死锁、Java进程CPU消耗过高等问题</p>
 <h3 id="JVM调试工具"><a href="#JVM调试工具" class="headerlink" title="JVM调试工具"></a>JVM调试工具</h3><p><br></p>
 <h4 id="jps-JVM-Process-Status-Tool"><a href="#jps-JVM-Process-Status-Tool" class="headerlink" title="jps (JVM Process Status Tool)"></a><em>jps (JVM Process Status Tool)</em></h4><p> <em>— 输出jvm运行的java进程状态信息</em></p>
 <p>命令格式：</p>
