@@ -241,17 +241,23 @@ classes that you can use:
   
   
   
+  
     
-<section class="post-comments">
-
-    <div class="ds-thread" data-thread-key="2017/02/03/interview/"></div>
-
-    <!-- UY BEGIN -->
-    <div id="uyan_frame"></div>
-    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
-    <!-- UY END -->
-
-</section>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://yiyeti.cc/usr/themes/veryse/css/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'c5ee9879bcc791506b54',
+        clientSecret: '6c27f57a3eec922a0e2cd0d87b24b009d19b2df3',
+        id: window.location.pathname,
+        repo: 'https://github.com/lilomin/lilomin.github.io',
+        owner: 'lilomin',
+        admin: 'lilomin',
+        distractionFreeMode: 'true'
+    })
+    gitalk.render('gitalk-container')
+</script>
 
 
 </article>

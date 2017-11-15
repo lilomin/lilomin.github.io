@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="Raymon">
 <meta property="og:description" content="Hexohexo是一款基于node.js的静态博客框架，瞬间生成上百个静态文件，并且在github上有非常多的样式可供选择，有能力的完全可以自己定义自己样式，或者扩展已有的样式，hexo加上github pages实现一键部署。">
 <meta property="og:image" content="http://yoursite.com/images/hexo+github.png">
-<meta property="og:updated_time" content="2017-05-19T12:59:03.354Z">
+<meta property="og:updated_time" content="2017-11-15T10:54:51.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo Github速搭博客(以及各种坑的记录) | Raymon">
 <meta name="twitter:description" content="Hexohexo是一款基于node.js的静态博客框架，瞬间生成上百个静态文件，并且在github上有非常多的样式可供选择，有能力的完全可以自己定义自己样式，或者扩展已有的样式，hexo加上github pages实现一键部署。">
@@ -201,6 +201,10 @@ classes that you can use:
 <h2 id="坑以及解决"><a href="#坑以及解决" class="headerlink" title="坑以及解决"></a>坑以及解决</h2><hr>
 <h4 id="配置好了后hexo-deploy没反应"><a href="#配置好了后hexo-deploy没反应" class="headerlink" title="配置好了后hexo deploy没反应"></a>配置好了后hexo deploy没反应</h4><p>可能1: deploy 下面的各种key后面必须接上一个空格<br>可能2: hexo生成的.deploy_git有问题，删掉之后重新hexo g后再次部署</p>
 <h4 id="每次deploy都要手动输入用户密码"><a href="#每次deploy都要手动输入用户密码" class="headerlink" title="每次deploy都要手动输入用户密码"></a>每次deploy都要手动输入用户密码</h4><p>需要在本地配置ssh key，详见引用资源里</p>
+<h4 id="hexo-deploy报错"><a href="#hexo-deploy报错" class="headerlink" title="hexo deploy报错"></a>hexo deploy报错</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Host key verification failed.</div><div class="line">fatal: Could not read from remote repository.</div><div class="line"></div><div class="line">Please make sure you have the correct access rights</div><div class="line">and the repository exists.</div><div class="line">FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html</div><div class="line">Error: Host key verification failed.</div><div class="line">fatal: Could not read from remote repository.</div></pre></td></tr></table></figure>
+<p>确定git config配置有配置正确的用户名和邮箱<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global --list</div></pre></td></tr></table></figure></p>
+<p>配置github ssh key<br>本地生成ssh key，执行命令一直回车<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;email@123.com&quot;</div></pre></td></tr></table></figure></p>
+<p>将生成的公钥配置到github ssh key列表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat ~/.ssh/id_rsa.pub</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>引用资源</p>
 </blockquote>
@@ -215,17 +219,23 @@ classes that you can use:
   
   
   
+  
     
-<section class="post-comments">
-
-    <div class="ds-thread" data-thread-key="2016/08/26/first/"></div>
-
-    <!-- UY BEGIN -->
-    <div id="uyan_frame"></div>
-    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
-    <!-- UY END -->
-
-</section>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://yiyeti.cc/usr/themes/veryse/css/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'c5ee9879bcc791506b54',
+        clientSecret: '6c27f57a3eec922a0e2cd0d87b24b009d19b2df3',
+        id: window.location.pathname,
+        repo: 'https://github.com/lilomin/lilomin.github.io',
+        owner: 'lilomin',
+        admin: 'lilomin',
+        distractionFreeMode: 'true'
+    })
+    gitalk.render('gitalk-container')
+</script>
 
 
 </article>
