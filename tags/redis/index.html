@@ -209,7 +209,7 @@ classes that you can use:
     <li>
 
       <h2 class="post-list__post-title post-title">
-        <a href="/2017/08/15/redis-lua/" title="link to Redis结合Lua解析">Redis结合Lua解析</a>
+        <a href="/2017/08/15/redis-lua/" title="link to 缓存数据库Redis结合Lua脚本解析">缓存数据库Redis结合Lua脚本解析</a>
       </h2>
 
       <div class="post-list__meta">
@@ -219,7 +219,7 @@ classes that you can use:
 
       <div class="excerpt">
         
-          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性，以及可能在高并发下产生脏数据；redis从2.6.0版本开始提供了一种新的解决方案，内置lua解释器，通过 redis Eval 命令来执行lua脚本，达到执行自定义逻辑的redis命令，并保障命令的原子性；</p>
+          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性；redis从2.6.0版本开始提供了一种新的解决方案，内置lua解释器，通过 redis Eval 命令来执行lua脚本，达到执行自定义逻辑的redis命令的目的。</p>
         
       </div>
 
