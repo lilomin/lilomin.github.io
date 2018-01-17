@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/11/27/read-java-program-improve/index.html">
 <meta property="og:site_name" content="Raymon">
 <meta property="og:description" content="近日出差在客户现场，解决现场问题之余在读这本《Java程序性能优化》，这本书从软件设计模式、Java数据结构、高并发场景和JVM调优等多方面，结合代码解析各个场景下的多种Java程序性能优化方案，比较基础也比较全面，很适合有一定经验的Java程序员，对自己基础知识进行巩固。">
-<meta property="og:updated_time" content="2018-01-17T13:32:16.454Z">
+<meta property="og:updated_time" content="2018-01-17T13:34:52.571Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Java程序性能优化》笔记 | Raymon">
 <meta name="twitter:description" content="近日出差在客户现场，解决现场问题之余在读这本《Java程序性能优化》，这本书从软件设计模式、Java数据结构、高并发场景和JVM调优等多方面，结合代码解析各个场景下的多种Java程序性能优化方案，比较基础也比较全面，很适合有一定经验的Java程序员，对自己基础知识进行巩固。">
@@ -345,7 +345,7 @@ classes that you can use:
 </li>
 </ul>
 <hr>
-<h3 id="JVM调优"><a href="#JVM调优" class="headerlink" title="JVM调优"></a>JVM调优</h3><h4 id="OOM"><a href="#OOM" class="headerlink" title="OOM"></a>OOM</h4><p>上来先说一下比较常见的outOfMemoryError的处理方式，当时程序因为出现OOM而退出时，往往难以重现定位问题，因此我们需要将那一瞬间的堆信息记录下来以便分析。通过-XX:+HeapDumpOnOutMemoryError将当前的堆信息保存到文件里，通过设置参数-XX:HeapDumpPath指定堆快照保存路径。如果希望OOM时运行自定义脚本，比如，重置系统：</p>
+<h3 id="JVM调优"><a href="#JVM调优" class="headerlink" title="JVM调优"></a>JVM调优</h3><h4 id="OOM"><a href="#OOM" class="headerlink" title="OOM"></a>OOM</h4><p>上来先说一下比较常见的outOfMemoryError的处理方式，当程序因为出现OOM而退出时，往往难以重现定位问题，因此我们需要将那一瞬间的堆信息记录下来以便分析。通过-XX:+HeapDumpOnOutMemoryError将当前的堆信息保存到文件里，通过设置参数-XX:HeapDumpPath指定堆快照保存路径。如果希望OOM时运行自定义脚本，比如，重置系统：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-XX:OnOutOfMemoryError=/tmp/reset.sh</div></pre></td></tr></table></figure>
 <p>使用以上参数后当发生OOM error时将会在对应目录下生成一份*.hprof文件，可以使用一些工具如Visual VM去分析快照定位问题。</p>
 <h4 id="GC日志信息"><a href="#GC日志信息" class="headerlink" title="GC日志信息"></a>GC日志信息</h4><p>获取GC信息也是JVM调优重要的一环，我们可以使用一些配置来输出GC信息：</p>
