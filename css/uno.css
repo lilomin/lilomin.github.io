@@ -994,9 +994,9 @@ em {
 
 blockquote {
   margin: 1em 0;
-  padding: 1em 0;
+  padding: 1em 2%;
   background: #f8f8f8;
-  border: 1px solid #eeeeee;
+  border: 0px solid #eeeeee;
   border-radius: 3px;
   /*font-family: "Roboto Slab", serif;*/
   /*font-family:  "Raleway",Verdana,sans-serif,宋体, serif, "Droid Serif", Helvetica Neue, Helvetica, Arial;*/

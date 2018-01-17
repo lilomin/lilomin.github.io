@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      《Java程序性能优化》笔记 | Raymon 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="lemin">
+    
+    
+
+    <meta name="description" content="近日出差在客户现场，解决现场问题之余在读这本《Java程序性能优化》，这本书从软件设计模式、Java数据结构、高并发场景和JVM调优等多方面，结合代码解析各个场景下的多种Java程序性能优化方案，比较基础也比较全面，很适合有一定经验的Java程序员，对自己基础知识进行巩固。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Java程序性能优化》笔记 | Raymon">
+<meta property="og:url" content="http://yoursite.com/2017/11/27/read-java-program-improve/index.html">
+<meta property="og:site_name" content="Raymon">
+<meta property="og:description" content="近日出差在客户现场，解决现场问题之余在读这本《Java程序性能优化》，这本书从软件设计模式、Java数据结构、高并发场景和JVM调优等多方面，结合代码解析各个场景下的多种Java程序性能优化方案，比较基础也比较全面，很适合有一定经验的Java程序员，对自己基础知识进行巩固。">
+<meta property="og:updated_time" content="2018-01-17T13:32:16.454Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《Java程序性能优化》笔记 | Raymon">
+<meta name="twitter:description" content="近日出差在客户现场，解决现场问题之余在读这本《Java程序性能优化》，这本书从软件设计模式、Java数据结构、高并发场景和JVM调优等多方面，结合代码解析各个场景下的多种Java程序性能优化方案，比较基础也比较全面，很适合有一定经验的Java程序员，对自己基础知识进行巩固。">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+        <a href="/" title="link to homepage for Raymon"><img src="/avatar.png" width="80" alt="Raymon logo" class="panel-cover__logo logo" /></a>
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Raymon</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          zero to hero
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/lilomin" title="GitHub" target="_blank">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    
+      <!-- Email -->
+      <li class="navigation__item">
+        <a href="mailto:lilomin@126.com" title="Email">
+          <i class='icon icon-mail'></i>
+          <span class="label">Email</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">《Java程序性能优化》笔记</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-11-27" class="post-meta__date date">2017-11-27</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/note/">note</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>近日出差在客户现场，解决现场问题之余在读这本《Java程序性能优化》，这本书从软件设计模式、Java数据结构、高并发场景和JVM调优等多方面，结合代码解析各个场景下的多种Java程序性能优化方案，比较基础也比较全面，很适合有一定经验的Java程序员，对自己基础知识进行巩固。</p>
+<a id="more"></a>
+<hr>
+<h3 id="Java数据结构"><a href="#Java数据结构" class="headerlink" title="Java数据结构"></a>Java数据结构</h3><h4 id="List"><a href="#List" class="headerlink" title="List"></a>List</h4><ol>
+<li><p>实现方式<br>ArrayList和Vector都使用数组了数组实现，LinkedList使用双向链表数据结构；</p>
+</li>
+<li><p>线程安全<br>只有Vector是线程安全的；</p>
+</li>
+<li><p>插入元素</p>
+<p>3.1 插入到列表尾端–add()<br> ArraryList的插入效率取决与 <em>ensureCapacity()</em> 方法，即扩容方法，ArrayList扩容时将会进行一次数组的复制；<br> LinkedList由于采用链表结构，因此不需要考虑扩容，不管插入到哪个位置都是同样的处理逻辑。</p>
+<p> 总结：在ArrayList设置的初始容量足够的情形下，两者处理效率应该相差无几，但是在数据量较大时，由于每次 <em>add()</em> LinkedList都需要创建一个 <em>Node</em>，因此LinkedList往往更占用内存。<br>3.2 插入到列表任意位置–add(index, element)<br> ArrayList每次调用该方法都会进行数组复制，大量的数组重组操作会导致系统性能下降；<br> 而LinkedList的优势在于它的链表结构，插入到任意位置的性能是一样的。</p>
+<p> 总结：如果程序中需要经常在列表任意位置插入元素，可以考虑用LinkedList代替ArrayList。</p>
+</li>
+<li><p>删除元素–remove()<br>ArrayList的remove()和add()操作逻辑基本一致，每次remove()都会进行数组重组；<br>LinkedList则是首先是根据index大小遍历半个列表，找到对应的Node，进行相应的移除操作；</p>
+</li>
+<li><p>遍历元素<br>较大数据量下，ForEach Iterate两种从头遍历，两者性能接近，当进行for遍历时，LinkedList的性能较差，原因是LinkedList每次读取元素都会去遍历列表找到对应Node；</p>
+</li>
+</ol>
+<p>总结：ArrayList的数组结构适用于随机访问场景，LinkedList的链表结构随机访问性能较差，但是在随机增删元素操作较多的场景下，LinkedList的性能应该更优。</p>
+<h4 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h4><ol>
+<li>HashMap</li>
+</ol>
+<p><em>JDK7</em> 中HashMap使用数组+链表结构，内部持有一个Entry数组，每个Entry都持有一个next属性，从而实现一个链表结构，以此来处理hash冲突问题；<br>而在<em>JDK8</em>为了进一步提升HashMap性能，其数据结构变为了数组+链表/红黑树，即当某个链表长度大于等于8时，链表将转换为红黑树。</p>
+<ol>
+<li>Hashtable</li>
+</ol>
+<p>Hashtable是线程安全的，并且不允许key和value为null，并发性能不如ConcurrentHashMap。</p>
+<ol>
+<li>LinkedHashMap</li>
+</ol>
+<p>LinkedHashMap是HashMap的一个子类，在HashMap的基础上增加了一个用户维护元素次序的链表。</p>
+<ol>
+<li>TreeMap</li>
+</ol>
+<p>TreeMap实现了SortedMap，可以根据键值排序，默认按章键值升序排序，也可以指定排序比较器，可以在TreeMap的构造函数中注入一个Comparator，或者使用一个实现了Comparable接口的key，就排序Map而言，TreeMap是相当高效的。</p>
+<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><p>set共同特点是元素不重复，HashSet是基于hash的快速插入，元素之间无序；LinkedHashSet维护了元素插入顺序的HashSet；TreeSet基于红黑树实现，有着高效的基于key的排序算法。</p>
+<hr>
+<h3 id="并行程序开发及优化"><a href="#并行程序开发及优化" class="headerlink" title="并行程序开发及优化"></a>并行程序开发及优化</h3><!-- #### 并行程序设计模式
+##### Future模式
+
+##### Master-Worker模式
+
+##### Guarded Suspension模式（保护暂停模式）
+
+##### 生产者消费者模式 -->
+<h4 id="JDK线程池"><a href="#JDK线程池" class="headerlink" title="JDK线程池"></a>JDK线程池</h4><p>线程池的出现是为了对线程的创建，和切换加以程序控制，减小系统开销；由于线程的创建销毁都会占用宝贵的系统资源，如果不加以控制，大量的线程极易冲垮系统，因此我们需要线程池来帮助我们在有限的范围内增加线程的数量，以及对线程生命周期的管理。</p>
+<p>先来看一下线程池的构造参数以及每一个参数含义:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,</span></span></div><div class="line">                          <span class="keyword">int</span> maximumPoolSize,</div><div class="line">                          <span class="keyword">long</span> keepAliveTime,</div><div class="line">                          TimeUnit unit,</div><div class="line">                          BlockingQueue&lt;Runnable&gt; workQueue,</div><div class="line">                          ThreadFactory threadFactory,</div><div class="line">                          RejectedExecutionHandler handler)</div></pre></td></tr></table></figure>
+<p>函数参数含义:</p>
+<ul>
+<li>corePoolSize      =&gt;    指定线程池内线程数量</li>
+<li>maximumPoolSize   =&gt;    指定线程池内最大的线程数量</li>
+<li>keepAliveTime     =&gt;    当线程池数量超过corePoolSize时，多余的空余线程的存活时间。即，超过corePoolSize的空闲线程，多久被销毁。</li>
+<li>unit              =&gt;    keepAliveTime单位</li>
+<li>workQueue         =&gt;    任务队列，被提交但是尚未执行的任务</li>
+<li>threadFactory     =&gt;    线程工程，用于创建线程，默认的参数即可。</li>
+<li>handle            =&gt;    拒绝策略，任务过多，来不及处理时，拒绝任务的策略。</li>
+</ul>
+<p>参数workQueue是一个阻塞队列，用于存放Runnable对象，常用的阻塞队列：</p>
+<ul>
+<li><p>SynchronousQueue<br>直接提交队列，该队列没有容量，每一个插入操作都要等一个相应的删除的任务，SynchronousQueue不保存数据，总是将任务提交给线程池，因此如果使用该队列作为workQueue，需要保证每个任务执行速度够快以及足够大的maximumPoolSize，否则将很容易处罚拒绝策略。</p>
+</li>
+<li><p>ArrayBlockingQueue<br>一个由数组结构组成的有界阻塞队列，构造函数必须有容量参数，默认情况下不保证访问者公平的访问队列，所谓公平访问队列是指阻塞的所有生产者线程或消费者线程，当队列可用时，可以按照阻塞的先后顺序访问队列，即先阻塞的生产者线程，可以先往队列里插入元素，先阻塞的消费者线程，可以先从队列里获取元素。通常情况下为了保证公平性会降低吞吐量。</p>
+</li>
+<li><p>LinkedBlockingQueue<br>一个由链表结构组成的有界阻塞队列，此队列的默认和最大长度为Integer.MAX_VALUE。此队列按照先进先出的原则对元素进行排序。</p>
+</li>
+<li><p>PriorityBlockingQueue<br>PriorityBlockingQueue是一个支持优先级的无界队列。默认情况下元素采取自然顺序排列，也可以通过比较器comparator来指定元素的排序规则。元素按照升序排列。</p>
+</li>
+</ul>
+<h5 id="Excutors内置线程池"><a href="#Excutors内置线程池" class="headerlink" title="Excutors内置线程池"></a>Excutors内置线程池</h5><ul>
+<li><p>newFixedThreadPool()：该方法返回一个固定数量的线程池，线程池内线程数固定。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,</div><div class="line">                                  <span class="number">0L</span>, TimeUnit.MILLISECONDS,</div><div class="line">                                  <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>corePoolSize 和 maximumPoolSize 大小一样，并且使用了LinkedBlockingQueue作为任务队列并使用默认的最大长度Integer.MAX_VALUE，因此当任务提交频繁时，将会一直存入队列，直到达到最大值。</p>
+</li>
+<li><p>newSingleThreadExecutor()：该方法返回只有一个线程的线程池。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newSingleThreadExecutor</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> FinalizableDelegatedExecutorService</div><div class="line">        (<span class="keyword">new</span> ThreadPoolExecutor(<span class="number">1</span>, <span class="number">1</span>,</div><div class="line">                                <span class="number">0L</span>, TimeUnit.MILLISECONDS,</div><div class="line">                                <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;()));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>只是将newCachedThreadPool()参数设置为了 1。</p>
+</li>
+<li><p>newCachedThreadPool()：该方法返回一个可根据实际情况调整线程数量的线程池，使用不存储数据的阻塞任务队列；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE,</div><div class="line">                                  <span class="number">60L</span>, TimeUnit.SECONDS,</div><div class="line">                                  <span class="keyword">new</span> SynchronousQueue&lt;Runnable&gt;());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当有任务被提交时，线程池将会使用空闲线程执行任务，若无空闲线程，则任务加入SynchronousQueue队列，而这个队列是一个直接提交的阻塞队列，因此他总是会迫使线程池创建一个新的线程执行任务，当任务执行完毕后，由于corePoolSize为0，因此空闲线程又会在60秒内被回收。因此对于如果同时有大量任务提交，任务执行不是特别快的话，那么系统便会开启等量线程处理，这样的做法将会很快耗尽资源。</p>
+</li>
+</ul>
+<h4 id="并发控制方法"><a href="#并发控制方法" class="headerlink" title="并发控制方法"></a>并发控制方法</h4><ol>
+<li><p>volatile<br>每个线程都有自己的工作内存区，因此当一个线程改变自己工作内存区的数据时，对其他线程来说是不可见的，volatile关键字就是用来迫使所有线程均读写主内存的对应变量，从而是volatile变量在多线程间可见。</p>
+</li>
+<li><p>synchronized<br>同步关键字，可以对对象的方法进行锁定，也可以对代码块进行锁定，还可以用于static函数，相当于把锁加到的当前Class对象上。</p>
+</li>
+<li><p>ReentrantLock<br>重入锁(可重入锁又称递归锁，指一个线程可以重复多次获取同一个锁，synchronized也是可重入锁)，比synchronized功能更加强大，可中断可定时，通过构造函数可指定公平和非公平两种锁；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ReentrantLock</span><span class="params">(<span class="keyword">boolean</span> fair)</span></span>&#123;...&#125;</div><div class="line"><span class="comment">// ReentrantLock提供一下方法：</span></div><div class="line"><span class="comment">// * lock(); 获得锁，如果锁已经占用则等待；</span></div><div class="line"><span class="comment">// * lockInterruptibly(); 获得锁，但优先响应中断；</span></div><div class="line"><span class="comment">// * tryLock(); 尝试获得锁，成功返回true，失败返回false，该方法不等待，立即返回</span></div><div class="line"><span class="comment">// * tryLock(long time, TimeUnit unit); 在给定时间内尝试获得锁；</span></div><div class="line"><span class="comment">// * unlock();释放锁。</span></div></pre></td></tr></table></figure>
+<p>可重入锁实现：为每个锁关联一个获取计数器和一个所有者线程,当计数值为0的时候,这个所就没有被任何线程只有.当线程请求一个未被持有的锁时,JVM将记下锁的持有者,并且将获取计数值置为1,如果同一个线程再次获取这个锁,计数值将递增,退出一次同步代码块,计算值递减,当计数值为0时,这个锁就被释放。</p>
+</li>
+<li><p>ReadWriteLock<br>读写锁，帮助减少锁竞争，用锁分离的机制提升性能；</p>
+</li>
+<li><p>Condition<br>Condition对象和Lock的关系，就如同 Object.wait(), Object.notify() 两个函数和Synchronized关键字一样，它们都可以配合使用以完成对多线程的协作控制(可参考BlockingQueue中实现，如ArrayBlockingQueue)。</p>
+</li>
+<li><p>Semaphore<br>信号量为多线程协作提供了更为强大的控制方法，无论是内部锁Synchronized还是重入锁ReentrantLock，一次都只允许一个线程访问资源，而信号量却可以指定多个线程同时访问同一资源。信号量构造方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Semaphore</span><span class="params">(<span class="keyword">int</span> permits)</span></span>&#123;&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Semaphore</span><span class="params">(<span class="keyword">int</span> permits, <span class="keyword">boolean</span> fair)</span></span>&#123;&#125;<span class="comment">// 第二个指定是否公平</span></div></pre></td></tr></table></figure>
+<p>主要逻辑方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">acquire</span><span class="params">()</span></span>; <span class="comment">// 尝试获取准入许可，无法获得则阻塞</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">acquireUniterruptibly</span><span class="params">()</span></span>; <span class="comment">// acquire()类似，但是不响应中断</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tryAcquire</span><span class="params">()</span></span>; <span class="comment">// 尝试获得一个许可，成功返回true，失败false</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">release</span><span class="params">()</span></span>; <span class="comment">// 用于线程访问结束释放一个许可，使其他等待线程可以进入</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>ThreadLocal<br>ThreadLocal是多线程间并发访问变量的解决方案，其不提供锁，而使用以空间换时间的手段，为每个线程提供变量的副本，以保障线程安全。</p>
+</li>
+</ol>
+<blockquote>
+<p>附：</p>
+</blockquote>
+<ul>
+<li><p>自旋锁：<br>简单了解了一下自旋锁，线程的状态和上下文切换是需要消耗系统资源的，多线程操作下频繁的挂起和恢复线程会给系统带来极大的压力，当访问资源所花费的CPU时间很短，小于线程的挂起并恢复的时间时，可考虑引入自旋锁，即线程没有获取到锁时不被挂起，而是开始空转，若干个空循环后，线程如果获得了锁则继续执行，依然不能获取锁才会被挂起。但对于线程竞争激烈，单线程长时间占用锁的场景，线程往往自旋等待之后仍无法获取锁，则白白浪费了CPU时间。<br>JVM提供 -XX:+UseSpining 来开启自旋锁，使用 -XX:PreBlockSpin 参数来设置自旋等待次数。</p>
+</li>
+<li><p>非阻塞的同步/无锁：<br>高并发时，对锁的竞争可能会成为系统瓶颈，为此，开发人员可以使用一种称为非阻塞同步方法，即不需要锁但依然能确保高并发下多线程间一致性。前面说到的ThreadLocal即时一种无锁的非阻塞同步方案，每个线程拥有独立变量副本，因此并行计算时无需等待。<br>这里将介绍一种更为重要的、基于比较与交换算法（Compare And Swap）CAS算法的无锁并发控制方法。<br>CAS算法大致逻辑：<br>  它包含三个参数CAS(V, E, N)。其中V表示要更新的变量，E表示预期值，N表示新值。仅当V值等于E值时，才会将将V值设置为N值，如果V与E不相等，则说明已有其他线程做了更新，则当前线程什么都不做，最后CAS返回当前V的真是值。</p>
+</li>
+</ul>
+<hr>
+<h3 id="JVM调优"><a href="#JVM调优" class="headerlink" title="JVM调优"></a>JVM调优</h3><h4 id="OOM"><a href="#OOM" class="headerlink" title="OOM"></a>OOM</h4><p>上来先说一下比较常见的outOfMemoryError的处理方式，当时程序因为出现OOM而退出时，往往难以重现定位问题，因此我们需要将那一瞬间的堆信息记录下来以便分析。通过-XX:+HeapDumpOnOutMemoryError将当前的堆信息保存到文件里，通过设置参数-XX:HeapDumpPath指定堆快照保存路径。如果希望OOM时运行自定义脚本，比如，重置系统：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-XX:OnOutOfMemoryError=/tmp/reset.sh</div></pre></td></tr></table></figure>
+<p>使用以上参数后当发生OOM error时将会在对应目录下生成一份*.hprof文件，可以使用一些工具如Visual VM去分析快照定位问题。</p>
+<h4 id="GC日志信息"><a href="#GC日志信息" class="headerlink" title="GC日志信息"></a>GC日志信息</h4><p>获取GC信息也是JVM调优重要的一环，我们可以使用一些配置来输出GC信息：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-XX:PrintGC</div></pre></td></tr></table></figure>
+<p>若需要更加详细的信息，可以使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-XX:PrintGCDetails</div></pre></td></tr></table></figure>
+<p>这个配置不仅会输出GC的总体情况，还包括新生带、老年代以及永久区各自的GC信息，一段典型的GC输出如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[GC (System.gc()) [PSYoungGen: <span class="number">11328</span>K-&gt;<span class="number">1288</span>K(<span class="number">18432</span>K)] <span class="number">19520</span>K-&gt;<span class="number">9488</span>K(<span class="number">38912</span>K), <span class="number">0.0016203</span> secs] [Times: user=<span class="number">0.00</span> sys=<span class="number">0.00</span>, real=<span class="number">0.00</span> secs] </div><div class="line">[<span class="function">Full <span class="title">GC</span> <span class="params">(System.gc()</span>) [PSYoungGen: 1288K-&gt;0<span class="title">K</span><span class="params">(<span class="number">18432</span>K)</span>] [ParOldGen: 8200K-&gt;9379<span class="title">K</span><span class="params">(<span class="number">20480</span>K)</span>] 9488K-&gt;9379<span class="title">K</span><span class="params">(<span class="number">38912</span>K)</span>, [Metaspace: 3142K-&gt;3142<span class="title">K</span><span class="params">(<span class="number">1056768</span>K)</span>], 0.0060822 secs] [Times: user</span>=<span class="number">0.00</span> sys=<span class="number">0.00</span>, real=<span class="number">0.01</span> secs] </div><div class="line">Heap</div><div class="line"> PSYoungGen      total <span class="number">18432</span>K, used <span class="number">273</span>K [<span class="number">0x00000000fec00000</span>, <span class="number">0x0000000100000000</span>, <span class="number">0x0000000100000000</span>)</div><div class="line">  eden space <span class="number">16384</span>K, <span class="number">1</span>% used [<span class="number">0x00000000fec00000</span>,<span class="number">0x00000000fec445d0</span>,<span class="number">0x00000000ffc00000</span>)</div><div class="line">  from space <span class="number">2048</span>K, <span class="number">0</span>% used [<span class="number">0x00000000ffc00000</span>,<span class="number">0x00000000ffc00000</span>,<span class="number">0x00000000ffe00000</span>)</div><div class="line">  to   space <span class="number">2048</span>K, <span class="number">0</span>% used [<span class="number">0x00000000ffe00000</span>,<span class="number">0x00000000ffe00000</span>,<span class="number">0x0000000100000000</span>)</div><div class="line"> ParOldGen       total <span class="number">20480</span>K, used <span class="number">9379</span>K [<span class="number">0x00000000fd800000</span>, <span class="number">0x00000000fec00000</span>, <span class="number">0x00000000fec00000</span>)</div><div class="line">  object space <span class="number">20480</span>K, <span class="number">45</span>% used [<span class="number">0x00000000fd800000</span>,<span class="number">0x00000000fe128cc8</span>,<span class="number">0x00000000fec00000</span>)</div><div class="line"> Metaspace       used <span class="number">3164</span>K, capacity <span class="number">4496</span>K, committed <span class="number">4864</span>K, reserved <span class="number">1056768</span>K</div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">space</span>    <span class="title">used</span> 349<span class="title">K</span>, <span class="title">capacity</span> 388<span class="title">K</span>, <span class="title">committed</span> 512<span class="title">K</span>, <span class="title">reserved</span> 1048576<span class="title">K</span></span></div></pre></td></tr></table></figure>
+<p>另外追加 -XX:+PrintGCTimestamp 输出GC发生时间，可以使用 -Xlogger:/tmp/gc.log 将GC日志输出到指定目录文件下。</p>
+<p>书中后续关于JVM内置工具以及一些JVM可视化产品的使用不再详细记录了，可以在网上搜索资料学习使用。</p>
+<p><br></p>
+<blockquote>
+<p>引用<br><a href="http://ifeve.com/java-blocking-queue/" target="_blank" rel="external">Java中的阻塞队列-并发编程网</a></p>
+</blockquote>
+
+  </section>
+
+  
+  
+  
+  
+    
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://yiyeti.cc/usr/themes/veryse/css/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'c5ee9879bcc791506b54',
+        clientSecret: '6c27f57a3eec922a0e2cd0d87b24b009d19b2df3',
+        id: window.location.pathname,
+        repo: 'hexo',
+        owner: 'lilomin',
+        admin: 'lilomin',
+        distractionFreeMode: 'true',
+        language: 'en'
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2018. Raymon ❤️ Sunny | Huno</span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1ebdc2e5c3ef0e1ca01b5ed227ddd88f";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+    <script src="/js/jquery.githubRepoWidget.min.js"></script>
+
+
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

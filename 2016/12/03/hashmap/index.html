@@ -16,16 +16,22 @@
     
     
 
-    <meta name="description" content="HashMap 概述HashMap是Map的非同步实现，不是线程安全的(Map的另外两种实现ConcurrentHashMap 和 HashTable是线程安全的)，HashMap允许null Key和null Value。">
+    <meta name="description" content="本文为解析JDK7源码(JDK8 HashMap数据结构已修改为数组+链表/红黑树)
+
+HashMap 概述HashMap是Map的非同步实现，不是线程安全的(Map的另外两种实现ConcurrentHashMap 和 HashTable是线程安全的)，HashMap允许null Key和null Value。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="源码解析--HashMap实现原理 | Raymon">
 <meta property="og:url" content="http://yoursite.com/2016/12/03/hashmap/index.html">
 <meta property="og:site_name" content="Raymon">
-<meta property="og:description" content="HashMap 概述HashMap是Map的非同步实现，不是线程安全的(Map的另外两种实现ConcurrentHashMap 和 HashTable是线程安全的)，HashMap允许null Key和null Value。">
-<meta property="og:updated_time" content="2017-05-19T13:04:28.646Z">
+<meta property="og:description" content="本文为解析JDK7源码(JDK8 HashMap数据结构已修改为数组+链表/红黑树)
+
+HashMap 概述HashMap是Map的非同步实现，不是线程安全的(Map的另外两种实现ConcurrentHashMap 和 HashTable是线程安全的)，HashMap允许null Key和null Value。">
+<meta property="og:updated_time" content="2017-12-15T11:33:34.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="源码解析--HashMap实现原理 | Raymon">
-<meta name="twitter:description" content="HashMap 概述HashMap是Map的非同步实现，不是线程安全的(Map的另外两种实现ConcurrentHashMap 和 HashTable是线程安全的)，HashMap允许null Key和null Value。">
+<meta name="twitter:description" content="本文为解析JDK7源码(JDK8 HashMap数据结构已修改为数组+链表/红黑树)
+
+HashMap 概述HashMap是Map的非同步实现，不是线程安全的(Map的另外两种实现ConcurrentHashMap 和 HashTable是线程安全的)，HashMap允许null Key和null Value。">
     
     
     
@@ -231,7 +237,10 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <h4 id="HashMap-概述"><a href="#HashMap-概述" class="headerlink" title="HashMap 概述"></a>HashMap 概述</h4><p>HashMap是Map的非同步实现，不是线程安全的(Map的另外两种实现ConcurrentHashMap 和 HashTable是线程安全的)，HashMap允许null Key和null Value。<br><a id="more"></a></p>
+    <blockquote>
+<p>本文为解析JDK7源码(JDK8 HashMap数据结构已修改为数组+链表/红黑树)</p>
+</blockquote>
+<h4 id="HashMap-概述"><a href="#HashMap-概述" class="headerlink" title="HashMap 概述"></a>HashMap 概述</h4><p>HashMap是Map的非同步实现，不是线程安全的(Map的另外两种实现ConcurrentHashMap 和 HashTable是线程安全的)，HashMap允许null Key和null Value。<br><a id="more"></a></p>
 <ul>
 <li><h4 id="HashMap构造函数"><a href="#HashMap构造函数" class="headerlink" title="HashMap构造函数"></a>HashMap构造函数</h4><p>  HashMap除了空构造函数，还重载了两个不同参数的构造器，一般直接使用无参构造方法</p>
   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Constructs an empty &lt;tt&gt;HashMap&lt;/tt&gt; with the default initial capacity</div><div class="line"> * (16) and the default load factor (0.75).</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>(initialCapacity, DEFAULT_LOAD_FACTOR);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -306,7 +315,7 @@ classes that you can use:
 
             <footer class="footer">
 
-    <span class="footer__copyright">&copy; 2017. Raymon ❤️ Sunny | Huno</span>
+    <span class="footer__copyright">&copy; 2018. Raymon ❤️ Sunny | Huno</span>
     
 </footer>
         </div>

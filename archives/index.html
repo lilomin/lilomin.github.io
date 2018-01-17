@@ -7,7 +7,7 @@
     
 
     <title>
-      归档 | Raymon 
+      Archives | Raymon 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -17,11 +17,11 @@
     
 
     <meta property="og:type" content="website">
-<meta property="og:title" content="归档 | Raymon">
+<meta property="og:title" content="Archives | Raymon">
 <meta property="og:url" content="http://yoursite.com/archives/index.html">
 <meta property="og:site_name" content="Raymon">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="归档 | Raymon">
+<meta name="twitter:title" content="Archives | Raymon">
     
     
     
@@ -208,6 +208,26 @@ classes that you can use:
     <li>
 
       <h2 class="post-list__post-title post-title">
+        <a href="/2017/11/27/read-java-program-improve/" title="link to 《Java程序性能优化》笔记">《Java程序性能优化》笔记</a>
+      </h2>
+
+      <div class="post-list__meta">
+
+        <time datetime="2017-11-27" class="post-list__meta--date date">2017-11-27</time> 
+      </div>
+
+      <div class="excerpt">
+        
+          <p>近日出差在客户现场，解决现场问题之余在读这本《Java程序性能优化》，这本书从软件设计模式、Java数据结构、高并发场景和JVM调优等多方面，结合代码解析各个场景下的多种Java程序性能优化方案，比较基础也比较全面，很适合有一定经验的Java程序员，对自己基础知识进行巩固。</p>
+        
+      </div>
+
+      <hr class="post-list__divider" />
+    </li>
+    
+    <li>
+
+      <h2 class="post-list__post-title post-title">
         <a href="/2017/08/15/redis-lua/" title="link to 缓存数据库Redis结合Lua脚本解析">缓存数据库Redis结合Lua脚本解析</a>
       </h2>
 
@@ -338,7 +358,10 @@ classes that you can use:
 
       <div class="excerpt">
         
-          <h4 id="HashMap-概述"><a href="#HashMap-概述" class="headerlink" title="HashMap 概述"></a>HashMap 概述</h4><p>HashMap是Map的非同步实现，不是线程安全的(Map的另外两种实现ConcurrentHashMap 和 HashTable是线程安全的)，HashMap允许null Key和null Value。<br>
+          <blockquote>
+<p>本文为解析JDK7源码(JDK8 HashMap数据结构已修改为数组+链表/红黑树)</p>
+</blockquote>
+<h4 id="HashMap-概述"><a href="#HashMap-概述" class="headerlink" title="HashMap 概述"></a>HashMap 概述</h4><p>HashMap是Map的非同步实现，不是线程安全的(Map的另外两种实现ConcurrentHashMap 和 HashTable是线程安全的)，HashMap允许null Key和null Value。<br>
         
       </div>
 
@@ -386,26 +409,6 @@ classes that you can use:
       <hr class="post-list__divider" />
     </li>
     
-    <li>
-
-      <h2 class="post-list__post-title post-title">
-        <a href="/2016/08/31/jenkins/" title="link to Jenkins + Git持续集成部署">Jenkins + Git持续集成部署</a>
-      </h2>
-
-      <div class="post-list__meta">
-
-        <time datetime="2016-08-31" class="post-list__meta--date date">2016-08-31</time> 
-      </div>
-
-      <div class="excerpt">
-        
-          <h3 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h3><p>Jenkins是一个开源的自动化集成部署工具，提供上百种插件，支持各种类型的工程的集成，可扩展性非常的强，功能也十分完善，是一款非常优秀的自动部署工具</p>
-        
-      </div>
-
-      <hr class="post-list__divider" />
-    </li>
-    
   </ol>
 
   <hr class="post-list__divider " />
@@ -416,7 +419,7 @@ classes that you can use:
     <span class="pagination__page-number"> 1 / 2</span>
     
     
-        <a class="older-posts pagination__older btn btn-small btn-tertiary" href="/archives/page/2/">下一页 &rarr;</a>
+        <a class="older-posts pagination__older btn btn-small btn-tertiary" href="/archives/page/2/">Next &rarr;</a>
     
 </nav>
 
@@ -424,7 +427,7 @@ classes that you can use:
 </div>
             <footer class="footer">
 
-    <span class="footer__copyright">&copy; 2017. Raymon ❤️ Sunny | Huno</span>
+    <span class="footer__copyright">&copy; 2018. Raymon ❤️ Sunny | Huno</span>
     
 </footer>
         </div>
