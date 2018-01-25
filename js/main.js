@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+  var num = Math.round(Math.random()*6);
+  var emj = ['(..•˘_˘•..)', '(｡・`ω´･)', '╭(●｀∀´●)╯', '╰(●’◡’●)╮', '(๑• . •๑)', '( ╯▽╰)', '(๑•̀ㅂ•́)و✧'];
+  document.title = emj[num] + " | " + this.title;
+
   $('a.blog-button').click(function() {
     if ($('.panel-cover').hasClass('panel-cover--collapsed')) return;
     currentWidth = $('.panel-cover').width();
