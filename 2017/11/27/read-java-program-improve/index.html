@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/11/27/read-java-program-improve/index.html">
 <meta property="og:site_name" content="Raymon">
 <meta property="og:description" content="近日出差在客户现场，解决现场问题之余在读这本《Java程序性能优化》，这本书从软件设计模式、Java数据结构、高并发场景和JVM调优等多方面，结合代码解析各个场景下的多种Java程序性能优化方案，比较基础也比较全面，很适合有一定经验的Java程序员，对自己基础知识进行巩固。">
-<meta property="og:updated_time" content="2018-01-17T13:34:52.571Z">
+<meta property="og:updated_time" content="2018-01-25T08:33:33.675Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Java程序性能优化》笔记 | Raymon">
 <meta name="twitter:description" content="近日出差在客户现场，解决现场问题之余在读这本《Java程序性能优化》，这本书从软件设计模式、Java数据结构、高并发场景和JVM调优等多方面，结合代码解析各个场景下的多种Java程序性能优化方案，比较基础也比较全面，很适合有一定经验的Java程序员，对自己基础知识进行巩固。">
@@ -353,7 +353,7 @@ classes that you can use:
 <p>若需要更加详细的信息，可以使用：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-XX:PrintGCDetails</div></pre></td></tr></table></figure>
 <p>这个配置不仅会输出GC的总体情况，还包括新生带、老年代以及永久区各自的GC信息，一段典型的GC输出如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[GC (System.gc()) [PSYoungGen: <span class="number">11328</span>K-&gt;<span class="number">1288</span>K(<span class="number">18432</span>K)] <span class="number">19520</span>K-&gt;<span class="number">9488</span>K(<span class="number">38912</span>K), <span class="number">0.0016203</span> secs] [Times: user=<span class="number">0.00</span> sys=<span class="number">0.00</span>, real=<span class="number">0.00</span> secs] </div><div class="line">[<span class="function">Full <span class="title">GC</span> <span class="params">(System.gc()</span>) [PSYoungGen: 1288K-&gt;0<span class="title">K</span><span class="params">(<span class="number">18432</span>K)</span>] [ParOldGen: 8200K-&gt;9379<span class="title">K</span><span class="params">(<span class="number">20480</span>K)</span>] 9488K-&gt;9379<span class="title">K</span><span class="params">(<span class="number">38912</span>K)</span>, [Metaspace: 3142K-&gt;3142<span class="title">K</span><span class="params">(<span class="number">1056768</span>K)</span>], 0.0060822 secs] [Times: user</span>=<span class="number">0.00</span> sys=<span class="number">0.00</span>, real=<span class="number">0.01</span> secs] </div><div class="line">Heap</div><div class="line"> PSYoungGen      total <span class="number">18432</span>K, used <span class="number">273</span>K [<span class="number">0x00000000fec00000</span>, <span class="number">0x0000000100000000</span>, <span class="number">0x0000000100000000</span>)</div><div class="line">  eden space <span class="number">16384</span>K, <span class="number">1</span>% used [<span class="number">0x00000000fec00000</span>,<span class="number">0x00000000fec445d0</span>,<span class="number">0x00000000ffc00000</span>)</div><div class="line">  from space <span class="number">2048</span>K, <span class="number">0</span>% used [<span class="number">0x00000000ffc00000</span>,<span class="number">0x00000000ffc00000</span>,<span class="number">0x00000000ffe00000</span>)</div><div class="line">  to   space <span class="number">2048</span>K, <span class="number">0</span>% used [<span class="number">0x00000000ffe00000</span>,<span class="number">0x00000000ffe00000</span>,<span class="number">0x0000000100000000</span>)</div><div class="line"> ParOldGen       total <span class="number">20480</span>K, used <span class="number">9379</span>K [<span class="number">0x00000000fd800000</span>, <span class="number">0x00000000fec00000</span>, <span class="number">0x00000000fec00000</span>)</div><div class="line">  object space <span class="number">20480</span>K, <span class="number">45</span>% used [<span class="number">0x00000000fd800000</span>,<span class="number">0x00000000fe128cc8</span>,<span class="number">0x00000000fec00000</span>)</div><div class="line"> Metaspace       used <span class="number">3164</span>K, capacity <span class="number">4496</span>K, committed <span class="number">4864</span>K, reserved <span class="number">1056768</span>K</div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">space</span>    <span class="title">used</span> 349<span class="title">K</span>, <span class="title">capacity</span> 388<span class="title">K</span>, <span class="title">committed</span> 512<span class="title">K</span>, <span class="title">reserved</span> 1048576<span class="title">K</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[GC (System.gc()) [PSYoungGen: 11328K-&gt;1288K(18432K)] 19520K-&gt;9488K(38912K), 0.0016203 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] </div><div class="line">[Full GC (System.gc()) [PSYoungGen: 1288K-&gt;0K(18432K)] [ParOldGen: 8200K-&gt;9379K(20480K)] 9488K-&gt;9379K(38912K), [Metaspace: 3142K-&gt;3142K(1056768K)], 0.0060822 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] </div><div class="line">Heap</div><div class="line"> PSYoungGen      total 18432K, used 273K [0x00000000fec00000, 0x0000000100000000, 0x0000000100000000)</div><div class="line">  eden space 16384K, 1% used [0x00000000fec00000,0x00000000fec445d0,0x00000000ffc00000)</div><div class="line">  from space 2048K, 0% used [0x00000000ffc00000,0x00000000ffc00000,0x00000000ffe00000)</div><div class="line">  to   space 2048K, 0% used [0x00000000ffe00000,0x00000000ffe00000,0x0000000100000000)</div><div class="line"> ParOldGen       total 20480K, used 9379K [0x00000000fd800000, 0x00000000fec00000, 0x00000000fec00000)</div><div class="line">  object space 20480K, 45% used [0x00000000fd800000,0x00000000fe128cc8,0x00000000fec00000)</div><div class="line"> Metaspace       used 3164K, capacity 4496K, committed 4864K, reserved 1056768K</div><div class="line">  class space    used 349K, capacity 388K, committed 512K, reserved 1048576K</div></pre></td></tr></table></figure>
 <p>另外追加 -XX:+PrintGCTimestamp 输出GC发生时间，可以使用 -Xlogger:/tmp/gc.log 将GC日志输出到指定目录文件下。</p>
 <p>书中后续关于JVM内置工具以及一些JVM可视化产品的使用不再详细记录了，可以在网上搜索资料学习使用。</p>
 <p><br></p>
@@ -368,8 +368,8 @@ classes that you can use:
   
   
     
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://yiyeti.cc/usr/themes/veryse/css/gitalk.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <div id="gitalk-container"></div>
 <script type="text/javascript">
     var gitalk = new Gitalk({
@@ -398,7 +398,8 @@ classes that you can use:
     </div>
 
     <!-- js files -->
-    <script src="/js/jquery.min.js"></script>
+    <!-- <script src="/js/jquery.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/scale.fix.js"></script>
     
