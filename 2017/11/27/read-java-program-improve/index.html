@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/11/27/read-java-program-improve/index.html">
 <meta property="og:site_name" content="Raymon">
 <meta property="og:description" content="近日出差在客户现场，解决现场问题之余在读这本《Java程序性能优化》，这本书从软件设计模式、Java数据结构、高并发场景和JVM调优等多方面，结合代码解析各个场景下的多种Java程序性能优化方案，比较基础也比较全面，很适合有一定经验的Java程序员，对自己基础知识进行巩固。">
-<meta property="og:updated_time" content="2018-01-25T08:33:33.675Z">
+<meta property="og:updated_time" content="2018-02-28T10:06:22.992Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Java程序性能优化》笔记 | Raymon">
 <meta name="twitter:description" content="近日出差在客户现场，解决现场问题之余在读这本《Java程序性能优化》，这本书从软件设计模式、Java数据结构、高并发场景和JVM调优等多方面，结合代码解析各个场景下的多种Java程序性能优化方案，比较基础也比较全面，很适合有一定经验的Java程序员，对自己基础知识进行巩固。">
@@ -291,7 +291,7 @@ classes that you can use:
 </ul>
 <p>参数workQueue是一个阻塞队列，用于存放Runnable对象，常用的阻塞队列：</p>
 <ul>
-<li><p>SynchronousQueue<br>直接提交队列，该队列没有容量，每一个插入操作都要等一个相应的删除的任务，SynchronousQueue不保存数据，总是将任务提交给线程池，因此如果使用该队列作为workQueue，需要保证每个任务执行速度够快以及足够大的maximumPoolSize，否则将很容易处罚拒绝策略。</p>
+<li><p>SynchronousQueue<br>直接提交队列，该队列没有容量，每一个插入操作都要等一个相应的删除的任务，SynchronousQueue不保存数据，总是将任务提交给线程池，因此如果使用该队列作为workQueue，需要保证每个任务执行速度够快以及足够大的maximumPoolSize，否则将很容易触发拒绝策略。</p>
 </li>
 <li><p>ArrayBlockingQueue<br>一个由数组结构组成的有界阻塞队列，构造函数必须有容量参数，默认情况下不保证访问者公平的访问队列，所谓公平访问队列是指阻塞的所有生产者线程或消费者线程，当队列可用时，可以按照阻塞的先后顺序访问队列，即先阻塞的生产者线程，可以先往队列里插入元素，先阻塞的消费者线程，可以先从队列里获取元素。通常情况下为了保证公平性会降低吞吐量。</p>
 </li>
@@ -375,7 +375,7 @@ classes that you can use:
         clientID: 'c5ee9879bcc791506b54',
         clientSecret: '6c27f57a3eec922a0e2cd0d87b24b009d19b2df3',
         id: window.location.pathname,
-        repo: 'hexo',
+        repo: 'lilomin.github.io',
         owner: 'lilomin',
         admin: 'lilomin',
         distractionFreeMode: 'true',
@@ -390,7 +390,7 @@ classes that you can use:
 
             <footer class="footer">
 
-    <span class="footer__copyright">&copy; 2018. Raymon ❤️ Sunny | Huno</span>
+    <span class="footer__copyright">&copy; 2016-2018. Raymon ❤️ Sunny | Huno</span>
     
 </footer>
         </div>
