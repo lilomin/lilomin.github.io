@@ -16,15 +16,16 @@
     
     
 
-    <meta property="og:type" content="article">
+    <meta name="description" content="前言redis是一个key-value形式的缓存数据库，是构建高性能web应用的一个强有力工具jedis是java的形式连接操作redis数据库，由spring替我们管理jedis连接池">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Jedis连接池整合spring实例 | Raymon">
 <meta property="og:url" content="http://yoursite.com/2016/11/27/jedis/index.html">
 <meta property="og:site_name" content="Raymon">
-<meta property="og:image" content="http://yoursite.com/images/jedis.png">
-<meta property="og:updated_time" content="2017-05-19T13:04:08.315Z">
+<meta property="og:description" content="前言redis是一个key-value形式的缓存数据库，是构建高性能web应用的一个强有力工具jedis是java的形式连接操作redis数据库，由spring替我们管理jedis连接池">
+<meta property="og:updated_time" content="2018-03-08T13:16:23.753Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jedis连接池整合spring实例 | Raymon">
-<meta name="twitter:image" content="http://yoursite.com/images/jedis.png">
+<meta name="twitter:description" content="前言redis是一个key-value形式的缓存数据库，是构建高性能web应用的一个强有力工具jedis是java的形式连接操作redis数据库，由spring替我们管理jedis连接池">
     
     
     
@@ -214,11 +215,16 @@ classes that you can use:
       <span class="post-meta__tags tags">
 
           
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/Java/">Java</a>
+            </font>
+          
 
           
              &#8226; 标签:
             <font class="tags">
-              <a class="tags-link" href="/tags/java/">java</a>, <a class="tags-link" href="/tags/redis/">redis</a>
+              <a class="tags-link" href="/tags/Redis/">Redis</a>
             </font>
           
 
@@ -230,8 +236,7 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <p><img src="/images/jedis.png" alt=""><br><a id="more"></a></p>
-<p>redis是一个key-value形式的缓存数据库，是构建高性能web应用的一个强有力工具<br>jedis是java的形式连接操作redis数据库，由spring替我们管理jedis连接池</p>
+    <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>redis是一个key-value形式的缓存数据库，是构建高性能web应用的一个强有力工具<br>jedis是java的形式连接操作redis数据库，由spring替我们管理jedis连接池<br><a id="more"></a></p>
 <p>直接贴上代码, pom依赖:</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--redis--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>spring 配置:</p>
@@ -268,7 +273,7 @@ classes that you can use:
 
             <footer class="footer">
 
-    <span class="footer__copyright">&copy; 2016-2018. Raymon ❤️ Sunny | Huno</span>
+    <span class="footer__copyright">&copy; 2016-2018. Raymon ❤️ Sunny | Powered by <a href="https://hexo.io/">Hexo</a> Theme <a href="https://github.com/letiantian/huno">Huno</a></span>
     
 </footer>
         </div>

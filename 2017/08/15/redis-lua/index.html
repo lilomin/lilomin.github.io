@@ -16,18 +16,18 @@
     
     
 
-    <meta name="description" content="背景redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性；redis从2.6.0版本开始提供了一种新的解决方案，内">
+    <meta name="description" content="redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性；redis从2.6.0版本开始提供了一种新的解决方案，内置l">
 <meta property="og:type" content="article">
 <meta property="og:title" content="缓存数据库Redis结合Lua脚本解析 | Raymon">
 <meta property="og:url" content="http://yoursite.com/2017/08/15/redis-lua/index.html">
 <meta property="og:site_name" content="Raymon">
-<meta property="og:description" content="背景redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性；redis从2.6.0版本开始提供了一种新的解决方案，内">
+<meta property="og:description" content="redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性；redis从2.6.0版本开始提供了一种新的解决方案，内置l">
 <meta property="og:image" content="http://yoursite.com/images/lua/redis_lua_1.png">
 <meta property="og:image" content="http://yoursite.com/images/lua/redis_lua_2.png">
-<meta property="og:updated_time" content="2017-11-18T11:58:37.980Z">
+<meta property="og:updated_time" content="2018-03-08T13:17:35.271Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="缓存数据库Redis结合Lua脚本解析 | Raymon">
-<meta name="twitter:description" content="背景redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性；redis从2.6.0版本开始提供了一种新的解决方案，内">
+<meta name="twitter:description" content="redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性；redis从2.6.0版本开始提供了一种新的解决方案，内置l">
 <meta name="twitter:image" content="http://yoursite.com/images/lua/redis_lua_1.png">
     
     
@@ -218,11 +218,16 @@ classes that you can use:
       <span class="post-meta__tags tags">
 
           
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/Database/">Database</a>
+            </font>
+          
 
           
              &#8226; 标签:
             <font class="tags">
-              <a class="tags-link" href="/tags/redis/">redis</a>
+              <a class="tags-link" href="/tags/Redis/">Redis</a>
             </font>
           
 
@@ -234,7 +239,7 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性；redis从2.6.0版本开始提供了一种新的解决方案，内置lua解释器，通过 redis Eval 命令来执行lua脚本，达到执行自定义逻辑的redis命令的目的。</p>
+    <p>redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性；redis从2.6.0版本开始提供了一种新的解决方案，内置lua解释器，通过 redis Eval 命令来执行lua脚本，达到执行自定义逻辑的redis命令的目的。</p>
 <a id="more"></a>
 <h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>Eval 命令的基本语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">redis 127.0.0.1:6379&gt; EVAL script numkeys key [key ...] arg [arg ...]</div></pre></td></tr></table></figure></p>
 <p>如果我们想在lua脚本中调用redis的命令该如何操作？可以在脚本中使用redis.call()或redis.pcall()直接调用，两者用法类似，只是在遇到错误时，返回错误的提示方式不同。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">eval &quot;return redis.call(&apos;set&apos;,KEYS[1],&apos;bar&apos;)&quot; 1 foo</div></pre></td></tr></table></figure></p>
@@ -277,7 +282,7 @@ classes that you can use:
 
             <footer class="footer">
 
-    <span class="footer__copyright">&copy; 2016-2018. Raymon ❤️ Sunny | Huno</span>
+    <span class="footer__copyright">&copy; 2016-2018. Raymon ❤️ Sunny | Powered by <a href="https://hexo.io/">Hexo</a> Theme <a href="https://github.com/letiantian/huno">Huno</a></span>
     
 </footer>
         </div>

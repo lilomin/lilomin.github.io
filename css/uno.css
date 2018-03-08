@@ -938,9 +938,10 @@ body {
 
 a {
   text-decoration: none;
-  color: #006699; }
+  color: #19abd6;
+  transition: color .3s; }
   a:hover {
-    color: green;
+    color: #006699;
     -o-transition: .5s;
     -ms-transition: .5s;
     -moz-transition: .5s;
@@ -957,7 +958,7 @@ h5 {
   /*font-family: "Roboto Slab", serif;*/
   /*font-family: "Raleway",Verdana,sans-serif,宋体, serif, "Droid Serif", Helvetica Neue, Helvetica, Arial;*/
   font-family: Droid Sans Mono, Monaco, Consolas, "Lucida Console", monospace;
-  font-weight: lighter;
+  /* font-weight: lighter; */
   color: #333333;
   -webkit-font-smoothing: antialiased; }
 
@@ -997,12 +998,13 @@ blockquote {
   padding: 1em 2%;
   background: #f8f8f8;
   border: 0px solid #eeeeee;
+  border-left: 5px solid #e4e4e4;
   border-radius: 3px;
   /*font-family: "Roboto Slab", serif;*/
   /*font-family:  "Raleway",Verdana,sans-serif,宋体, serif, "Droid Serif", Helvetica Neue, Helvetica, Arial;*/
   font-family: Droid Sans Mono, Monaco, Consolas, "Lucida Console", monospace;
-  font-weight: lighter;
-  font-style: italic;
+  /* font-weight: lighter; */
+  /* font-style: italic; */
   font-size: 1.0em;
   /*text-align: center;*/ }
   blockquote p:last-child {
@@ -1111,8 +1113,9 @@ code {
   display: block;
   margin-bottom: .7em; }
   .footer__copyright a {
-    color: #a6a6a6;
-    text-decoration: underline; }
+    color: #19abd6;
+    transition: color .3s;
+    text-decoration: none; }
     .footer__copyright a:hover {
       color: #006699; }
 

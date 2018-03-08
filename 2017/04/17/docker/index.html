@@ -7,7 +7,7 @@
     
 
     <title>
-      Docker新手入门 | Raymon 
+      Docker入门 | Raymon 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,15 +16,16 @@
     
     
 
-    <meta property="og:type" content="article">
-<meta property="og:title" content="Docker新手入门 | Raymon">
+    <meta name="description" content="Docker 是一个可移植的容器，为开发者提供一种快速部署环境的解决方案，可以将相同的环境移植到任何linux机器上正常运行，而不需要重新搭建基础服务配置环境，省去了许多重复搭建工作，并且可以做成shell脚本一键部署，或者利用curl调用docker提供remote api实现远程部署，公司的线上环境使用到docker部署环境，因此自己也花了点时间去学习了一下；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker入门 | Raymon">
 <meta property="og:url" content="http://yoursite.com/2017/04/17/docker/index.html">
 <meta property="og:site_name" content="Raymon">
-<meta property="og:image" content="http://yoursite.com/images/docker.jpg">
-<meta property="og:updated_time" content="2018-02-27T14:55:27.035Z">
+<meta property="og:description" content="Docker 是一个可移植的容器，为开发者提供一种快速部署环境的解决方案，可以将相同的环境移植到任何linux机器上正常运行，而不需要重新搭建基础服务配置环境，省去了许多重复搭建工作，并且可以做成shell脚本一键部署，或者利用curl调用docker提供remote api实现远程部署，公司的线上环境使用到docker部署环境，因此自己也花了点时间去学习了一下；">
+<meta property="og:updated_time" content="2018-03-08T13:13:23.130Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker新手入门 | Raymon">
-<meta name="twitter:image" content="http://yoursite.com/images/docker.jpg">
+<meta name="twitter:title" content="Docker入门 | Raymon">
+<meta name="twitter:description" content="Docker 是一个可移植的容器，为开发者提供一种快速部署环境的解决方案，可以将相同的环境移植到任何linux机器上正常运行，而不需要重新搭建基础服务配置环境，省去了许多重复搭建工作，并且可以做成shell脚本一键部署，或者利用curl调用docker提供remote api实现远程部署，公司的线上环境使用到docker部署环境，因此自己也花了点时间去学习了一下；">
     
     
     
@@ -204,7 +205,7 @@ classes that you can use:
 
   <header class="post-header">
     
-    <h1 class="post-title">Docker新手入门</h1>
+    <h1 class="post-title">Docker入门</h1>
 
     
 
@@ -214,11 +215,16 @@ classes that you can use:
       <span class="post-meta__tags tags">
 
           
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/Software/">Software</a>
+            </font>
+          
 
           
              &#8226; 标签:
             <font class="tags">
-              <a class="tags-link" href="/tags/docker/">docker</a>
+              <a class="tags-link" href="/tags/Docker/">Docker</a>
             </font>
           
 
@@ -230,10 +236,7 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <p><img src="/images/docker.jpg" alt=""></p>
-<a id="more"></a>
-<hr>
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Docker 是一个可移植的容器，为开发者提供一种快速部署环境的解决方案，可以将相同的环境移植到任何linux机器上正常运行，而不需要重新搭建基础服务配置环境，省去了许多重复搭建工作，并且可以做成shell脚本一键部署，或者利用curl调用docker提供remote api实现远程部署，公司的线上环境使用到docker部署环境，因此自己也花了点时间去学习了一下；</p>
+    <p>Docker 是一个可移植的容器，为开发者提供一种快速部署环境的解决方案，可以将相同的环境移植到任何linux机器上正常运行，而不需要重新搭建基础服务配置环境，省去了许多重复搭建工作，并且可以做成shell脚本一键部署，或者利用curl调用docker提供remote api实现远程部署，公司的线上环境使用到docker部署环境，因此自己也花了点时间去学习了一下；<br><a id="more"></a></p>
 <hr>
 <h3 id="搭建Docker"><a href="#搭建Docker" class="headerlink" title="搭建Docker"></a>搭建Docker</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>首先你需要一台linux主机，听说docker(CE)已经支持windows10了，但是作为主机提供服务windows还是不靠谱，因此这里建议如果你的机器是windows的先去下个VMware再安装个linux；</p>
 <h4 id="配置Docker远程端口"><a href="#配置Docker远程端口" class="headerlink" title="配置Docker远程端口"></a>配置Docker远程端口</h4><p>添加一行开启tcp端口: OPTIONS=’–selinux-enabled -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock’, 然后重启docker即可使用curl等调用docker提供的API, 不用登陆服务器或虚拟机就能通过脚本一键快速启停服务</p>
@@ -284,7 +287,7 @@ classes that you can use:
 
             <footer class="footer">
 
-    <span class="footer__copyright">&copy; 2016-2018. Raymon ❤️ Sunny | Huno</span>
+    <span class="footer__copyright">&copy; 2016-2018. Raymon ❤️ Sunny | Powered by <a href="https://hexo.io/">Hexo</a> Theme <a href="https://github.com/letiantian/huno">Huno</a></span>
     
 </footer>
         </div>
