@@ -24,7 +24,7 @@
 <meta property="og:description" content="JVM 全称 Java Virtual Machine，Java程序编译之后生成的.class文件就是交由JVM执行，由JVM将.class文件内容翻译成对于系统可识别的机器语言，这就是Java之所以能一次编译，到处运行。">
 <meta property="og:image" content="http://yoursite.com/images/jmap-1.png">
 <meta property="og:image" content="http://yoursite.com/images/堆内存.png">
-<meta property="og:updated_time" content="2018-03-21T02:53:06.581Z">
+<meta property="og:updated_time" content="2018-03-21T03:01:29.641Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM参数解析与调优 | Raymon">
 <meta name="twitter:description" content="JVM 全称 Java Virtual Machine，Java程序编译之后生成的.class文件就是交由JVM执行，由JVM将.class文件内容翻译成对于系统可识别的机器语言，这就是Java之所以能一次编译，到处运行。">
@@ -235,7 +235,7 @@ classes that you can use:
 
   <section id="post-content" class="article-content post">
     <p>JVM 全称 Java Virtual Machine，Java程序编译之后生成的.class文件就是交由JVM执行，由JVM将.class文件内容翻译成对于系统可识别的机器语言，这就是Java之所以能一次编译，到处运行。<br><a id="more"></a></p>
-<p>关于JVM配置以及调优是Java程序员进阶必须掌握的，一个优秀的Java程序员可以根据运行环境设置JVM参数，从而达到最优配置，合理充分的利用系统资源，避免生产环境发生一些如OOM的异常或者线程死锁、Java进程CPU消耗过高等问题</p>
+<p>关于JVM配置以及调优是Java程序员进阶必须掌握的，一个优秀的Java程序员可以根据运行环境设置JVM参数，从而达到最优配置，合理充分的利用系统资源，避免生产环境发生一些如OOM的异常或者线程死锁、Java进程CPU消耗过高等问题。</p>
 <h3 id="JVM调试工具"><a href="#JVM调试工具" class="headerlink" title="JVM调试工具"></a>JVM调试工具</h3><h4 id="jps-JVM-Process-Status-Tool"><a href="#jps-JVM-Process-Status-Tool" class="headerlink" title="jps (JVM Process Status Tool)"></a><em>jps (JVM Process Status Tool)</em></h4><p> <em>— 输出jvm运行的java进程状态信息</em></p>
 <p>命令格式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jps [options] [hostId]</div></pre></td></tr></table></figure>
@@ -289,7 +289,7 @@ classes that you can use:
 <p><img src="/images/jmap-1.png" alt=""></p>
 <p><br></p>
 <h4 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a><em>jstat</em></h4><p> <em>— 输出jvm内存使用情况</em></p>
-<p>jstat 监控系统主题资源使用情况，无法定位到具体的Java应用情况；使用语法：</p>
+<p>jstat 监控系统整体资源使用情况，使用语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jstat -&lt;option&gt; [-t] [-h&lt;lines&gt;] &lt;vmid&gt; [&lt;interval&gt; [&lt;count&gt;]]</div></pre></td></tr></table></figure>
 <p>jstat 比较常用到场景是查看实时的垃圾回收统计，通常命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost hsperfdata_root]# jstat -gc 19560 5000</div></pre></td></tr></table></figure></p>
 <p>即会每5秒一次显示进程为19560的GC情况：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT     GCT</div><div class="line">17472.0 17472.0 275.9   0.0   139968.0  2271.9   349568.0   21151.3   55808.0 53992.8 6400.0 6044.1   5554   30.602   4      0.809   31.411</div><div class="line">17472.0 17472.0 275.9   0.0   139968.0 58303.5   349568.0   21151.3   55808.0 53992.8 6400.0 6044.1   5554   30.602   4      0.809   31.411</div><div class="line">17472.0 17472.0 275.9   0.0   139968.0 102692.6  349568.0   21151.3   55808.0 53992.8 6400.0 6044.1   5554   30.602   4      0.809   31.411</div><div class="line">17472.0 17472.0 275.9   0.0   139968.0 103396.5  349568.0   21151.3   55808.0 53992.8 6400.0 6044.1   5554   30.602   4      0.809   31.411</div><div class="line">17472.0 17472.0 275.9   0.0   139968.0 136708.8  349568.0   21151.3   55808.0 53992.8 6400.0 6044.1   5554   30.602   4      0.809   31.411</div><div class="line">17472.0 17472.0  0.0   273.1  139968.0 31730.4   349568.0   21151.3   55808.0 53992.8 6400.0 6044.1   5555   30.605   4      0.809   31.414</div><div class="line">17472.0 17472.0  0.0   273.1  139968.0 64034.4   349568.0   21151.3   55808.0 53992.8 6400.0 6044.1   5555   30.605   4      0.809   31.414</div></pre></td></tr></table></figure></p>
